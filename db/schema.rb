@@ -55,7 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_234256) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "url"
+    t.string "image_url"
+    t.string "thumbnail_url"
     t.text "description"
     t.decimal "price", precision: 8, scale: 2
     t.integer "inventory"
@@ -64,12 +65,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_234256) do
   end
 
   create_table "products_categories", force: :cascade do |t|
-    t.bigint "products_id"
-    t.bigint "categories_id"
+    t.bigint "product_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["categories_id"], name: "index_products_categories_on_categories_id"
-    t.index ["products_id"], name: "index_products_categories_on_products_id"
+    t.index ["category_id"], name: "index_products_categories_on_category_id"
+    t.index ["product_id"], name: "index_products_categories_on_product_id"
   end
 
   create_table "products_tags", force: :cascade do |t|
@@ -108,8 +109,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_234256) do
   add_foreign_key "orders", "customers"
   add_foreign_key "orders_products", "orders"
   add_foreign_key "orders_products", "products"
-  add_foreign_key "products_categories", "categories", column: "categories_id"
-  add_foreign_key "products_categories", "products", column: "products_id"
+  add_foreign_key "products_categories", "categories"
+  add_foreign_key "products_categories", "products"
   add_foreign_key "products_tags", "products"
   add_foreign_key "products_tags", "tags"
   add_foreign_key "promotions_products", "products"
