@@ -6,7 +6,12 @@
     "axios": "^1.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3",
     "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.10.0",
+    "@babel/plugin-transform-private-property-in-object": "^7.23.4"
   },
   "scripts": {
     "start": "react-scripts start",
