@@ -41,6 +41,10 @@ h1 {
 
 h2 {
   color: var(--clr-light);
+  font-size: 1.75rem;
+  font-weight: 500;
+  padding: 1rem 3rem;
+  margin-bottom: 3rem;
 }
 
 h3 {
@@ -64,4 +68,14 @@ h4 {
 .link {
   text-decoration: none;
   color: var(--clr-dark)
+}
+
+.page-subtitle,
+.page-footer-buffer {
+  background-color: var(--clr-accent);
+}
+
+.page-footer-buffer {
+  height: 2rem;
+  margin-top: 3rem;
 }
