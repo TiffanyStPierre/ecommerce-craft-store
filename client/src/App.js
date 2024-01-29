@@ -4,6 +4,8 @@ import axios from 'axios';
 import Home from './pages/Home';
 import NavBar from './components/Header';
 import Footer from './components/Footer';
+import Product from './pages/Product';
+import ProductList from './pages/ProductList';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/product/:id' element={<Product />} />
+        <Route path='/products/:category' element={<ProductList />} />
       </Routes>
       <Footer />
     </Router>

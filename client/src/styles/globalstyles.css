@@ -60,3 +60,8 @@ h4 {
   color: var(--clr-light);
   border: none;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--clr-dark)
+}
