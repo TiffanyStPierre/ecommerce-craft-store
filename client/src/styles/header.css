@@ -1,0 +1,17 @@
+.header {
+  width: 100%;
+  display: flex;
+  padding: 0.5rem 3rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-icon {
+  color: var(--clr-accent);
+  margin-right: 2rem;
+}
