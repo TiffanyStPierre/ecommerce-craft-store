@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  padding: 3rem 0 5rem 0;
+}
+
+.footer-subsection {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-subsection p {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.footer-icon {
+  color: var(--clr-accent);
+  margin: 1rem 0 0 0;
+}

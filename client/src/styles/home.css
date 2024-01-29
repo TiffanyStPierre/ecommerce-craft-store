@@ -69,7 +69,32 @@
   margin: 0 auto;
 }
 
-.home-icon {
+.home-icon-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.home-icon {
+  color: var(--clr-accent);
+  margin-bottom: 1rem;
+}
+
+.home-kids-feature {
+  background-image: url('/public/assets/images/home-kids-banner.webp');
+  background-color: var(--clr-accent);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.home-kids-feature p {
+  font-size: 2.5rem;
+  padding: 0.75em 4em;
+  font-weight: 600;
 }

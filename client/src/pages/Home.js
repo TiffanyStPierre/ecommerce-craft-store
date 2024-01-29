@@ -42,18 +42,25 @@ export default function Home() {
         </p>
       </section>
       <section className="home-icons">
-        <div className="home-icon">
-          <FontAwesomeIcon icon={faTruck} size="3x" />
+        <div className="home-icon-container">
+          <FontAwesomeIcon icon={faTruck} size="3x" className="home-icon" />
           <h4>Free Shipping</h4>
         </div>
-        <div className="home-icon">
-          <FontAwesomeIcon icon={faLeaf} size="3x" />
+        <div className="home-icon-container">
+          <FontAwesomeIcon icon={faLeaf} size="3x" className="home-icon" />
           <h4>Eco Friendly Packaging</h4>
         </div>
-        <div className="home-icon">
-          <FontAwesomeIcon icon={faGift} size="3x" />
+        <div className="home-icon-container">
+          <FontAwesomeIcon icon={faGift} size="3x" className="home-icon" />
           <h4>Gift Cards Available</h4>
         </div>
+      </section>
+      <section className="home-kids-feature">
+        <p>
+          Check Out Our
+          <br />
+          Kid's Zone!
+        </p>
       </section>
     </>
   );
