@@ -1,0 +1,75 @@
+.hero {
+  background-image: url('/public/assets/images/craft-hero-image.webp');
+  background-color: var(--clr-accent);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.hero-text {
+  font-family: var(--ff-slogan);
+  font-size: 2.4rem;
+  text-align: center;
+}
+
+.hero-button {
+  margin: 2rem 0 4rem 0;
+}
+
+.home-collections {
+  width: 80%;
+  display: flex;
+  margin: 2rem auto;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.home-collection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-collection img {
+  border-radius: 25px;
+  margin-bottom: 1rem;
+}
+
+.home-featured-special {
+  width: 65%;
+  margin: 5rem auto;
+  border-radius: 35px;
+  background-image: url('/public/assets/images/home-knitting-banner.webp');
+  background-color: var(--clr-accent);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  background-position: center;
+}
+
+.home-featured-special p {
+  color: var(--clr-light);
+  font-size: 2.5rem;
+  padding: 0.75em 1em;
+  font-weight: 600;
+}
+
+.home-icons {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+.home-icon {
+  display: flex;
+  flex-direction: column;
+}

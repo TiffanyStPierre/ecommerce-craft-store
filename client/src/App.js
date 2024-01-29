@@ -1,10 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import './styles/Reset.css';
-import './styles/App.css';
 import Home from './pages/Home';
-import NavBar from './components/NavBar';
+import NavBar from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
