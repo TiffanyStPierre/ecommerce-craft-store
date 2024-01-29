@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Custom Properties */
+
+:root {
+  --ff-primary: 'Inter', sans-serif;
+  --ff-title: 'Lato', sans-serif;
+  --ff-slogan: 'Itim', cursive;
+
+  --clr-dark: #211C1E;
+  --clr-accent: #3A4966;
+  --clr-light: #ffffff;
+}
+
+/* General App Styles */
+
+body {
+  color: var(--clr-dark);
+  font-family: var(--ff-primary);
+  line-height: 1.4;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
