@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   namespace :api do # /api/data
     resources :products
     get '/products', to: 'products#index'
+
+    resources :categories
+    get 'categories/:name', to: 'categories#show'
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do
