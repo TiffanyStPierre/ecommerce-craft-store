@@ -92,9 +92,9 @@ Product.create(products)
 
 # Seed Orders
 orders = [
-  { customer: 1, order_date: Date.parse('2023-06-22'), shipped_date: Date.parse('2023-06-28'), subtotal_amount: 283.97, tax_amount: 14.20, total_amount: 298.17 },
-  { customer: 4, order_date: Date.parse('2023-10-28'), shipped_date: Date.parse('2023-11-07'), subtotal_amount: 61.98, tax_amount: 3.10, total_amount: 65.08 },
-  { customer: 5, order_date: Date.parse('2024-01-02'), shipped_date: Date.parse('2024-01-09'), subtotal_amount: 134.93, tax_amount: 6.75, total_amount: 141.68 },
+  { customer_id: 1, order_date: Date.parse('2023-06-22'), shipped_date: Date.parse('2023-06-28'), subtotal_amount: 283.97, tax_amount: 14.20, total_amount: 298.17 },
+  { customer_id: 4, order_date: Date.parse('2023-10-28'), shipped_date: Date.parse('2023-11-07'), subtotal_amount: 61.98, tax_amount: 3.10, total_amount: 65.08 },
+  { customer_id: 5, order_date: Date.parse('2024-01-02'), shipped_date: Date.parse('2024-01-09'), subtotal_amount: 134.93, tax_amount: 6.75, total_amount: 141.68 },
 ]
 Order.create(orders)
 
@@ -175,7 +175,7 @@ products_categories = [
   { product_id: 54, category_id: 3 },
   { product_id: 55, category_id: 3 },
 ]
-ProductCategory.create(products_categories)
+ProductsCategory.create(products_categories)
 
 # Seed Promotions_Products
 promotions_products = [
