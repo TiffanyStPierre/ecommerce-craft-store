@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  order_date: 2024-01-28
+  shipped_date: 2024-01-28
+  subtotal_amount: 9.99
+  tax_amount: 9.99
+  total_amount: 9.99
+
+two:
+  customer: two
+  order_date: 2024-01-28
+  shipped_date: 2024-01-28
+  subtotal_amount: 9.99
+  tax_amount: 9.99
+  total_amount: 9.99
