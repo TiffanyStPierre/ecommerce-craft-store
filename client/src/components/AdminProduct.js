@@ -9,34 +9,35 @@ export default function AdminProduct(props) {
   return (
     <>
       {/* Displayed on smaller screens */}
-      <Row className="mb-2 d-md-none">
-        <Col xs={12} sm={12} md={8} lg={8}>
-          <Card className="admin-product-card">
+      <Row className="mb-2 d-md-none mx-auto">
+        <Col xs={10} sm={10} md={8} lg={8} className="mx-auto">
+          <Card className="admin-product-card mx-auto">
             <Card.Img variant="top" src={props.product.thumbnail_url} alt={props.product.name} />
             <Card.Body>
-              <Card.Title>{props.product.name}</Card.Title>
+              <Card.Title className="text-center">{props.product.name}</Card.Title>
+              <Card.Text className="text-center">{props.product.price}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
       </Row>
       {/* Displayed on larger screens */}
-      <Row className="mb-3 d-none d-md-flex">
-        <Col>
-          <img src={props.product.thumbnail_url} alt={props.product.name} style={{ height: "100px", width: "100%" }} className="rounded-circle" />
+      <Row className="mb-3 d-none d-md-flex align-items-center border rounded p-2">
+        <Col xs={3} md={2} className="text-center">
+          <img src={props.product.thumbnail_url} alt={props.product.name} style={{ height: "100%", width: "100%", objectFit: "cover" }} className="rounded-circle" />
         </Col>
-        <Col>
+        <Col xs={3} md={2} className="text-center">
           {props.product.name}
         </Col>
-        <Col>
+        <Col xs={2} md={2} className="text-center">
           ${props.product.price}
         </Col>
-        <Col>
+        <Col xs={2} md={2} className="text-center">
           Category
         </Col>
-        <Col>
+        <Col xs={1} md={2} className="text-center">
           {props.product.inventory}
         </Col>
-        <Col>
+        <Col xs={1} md={2} className="text-center">
           Promotions
         </Col>
       </Row>

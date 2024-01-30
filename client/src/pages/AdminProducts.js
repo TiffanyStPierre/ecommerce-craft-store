@@ -24,23 +24,24 @@ export default function AdminProducts() {
     <>
       <h2 className="page-subtitle">Admin Dashboard - Product List</h2>
       <h3>Products</h3>
-      <Container className="mt-5">
-        <Row className="d-none d-md-flex">
-          <Col>
+      <Container className="mt-5 px-5 container-border">
+        <Row className="d-none d-md-flex align-items-center pt-4 pb-2">
+          <Col style={{ width: "100px" }} className="text-center h5">
+          <strong>Image</strong>
           </Col>
-          <Col>
+          <Col className="text-center h5">
             <strong>Name</strong>
           </Col>
-          <Col>
+          <Col className="text-center h5">
             <strong>Price</strong>
           </Col>
-          <Col>
+          <Col className="text-center h5">
             <strong>Category</strong>
           </Col>
-          <Col>
+          <Col className="text-center h5">
             <strong>Inventory</strong>
           </Col>
-          <Col>
+          <Col className="text-center h5">
             <strong>Promotions</strong>
           </Col>
         </Row>
