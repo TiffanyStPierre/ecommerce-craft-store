@@ -52,15 +52,15 @@ export default function Order() {
         </div>
         <div>
           <h4>Order Date</h4>
-          <p>{order.order_date}</p>
+          <p>{order.order.order_date}</p>
         </div>
         <div>
           <h4>Invoice #</h4>
-          <p>{order.id}</p>
+          <p>{order.order.id}</p>
         </div>
         <div>
           <h4>Order Total</h4>
-          <p>${order.total_amount}</p>
+          <p>${order.order.total_amount}</p>
         </div>
         <div>
           <h4>Items Ordered</h4>

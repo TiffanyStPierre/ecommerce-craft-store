@@ -7,8 +7,11 @@ class Api::OrdersController < ApplicationController
   end
 
   def show
-    # already set by the before_action
-    render json: @order, include: [:customer, :products]
+    render json: {
+      order: @order,
+      customer: @order.customer,
+      products_with_quantity: @order.products_with_quantity.map { |pq| { product: pq[:product].as_json, product_quantity: pq[:product_quantity] } }
+    }
   end
 
   private
