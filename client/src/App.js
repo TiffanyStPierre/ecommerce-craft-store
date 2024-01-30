@@ -7,6 +7,9 @@ import Footer from './components/Footer';
 import Product from './pages/Product';
 import ProductList from './pages/ProductList';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminProducts from './pages/AdminProducts';
+import Orders from './pages/Orders';
+import Promotions from './pages/Promotions';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path='/product/:id' element={<Product />} />
         <Route path='/products/:category' element={<ProductList />} />
         <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin/products' element={<AdminProducts />} />
+        <Route path='/admin/orders' element={<Orders />} />
+        <Route path='/admin/promotions' element={<Promotions />} />
       </Routes>
       <Footer />
     </Router>
