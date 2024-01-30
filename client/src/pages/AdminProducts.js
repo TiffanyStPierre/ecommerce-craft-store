@@ -22,7 +22,7 @@ export default function AdminProducts() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin Dashboard - Product List</h2>
+      <h2 className="page-subtitle">Admin Dashboard - Products</h2>
       <h3>Products</h3>
       <Container className="mt-5 px-5 container-border">
         <Row className="d-none d-md-flex align-items-center pt-4 pb-2">

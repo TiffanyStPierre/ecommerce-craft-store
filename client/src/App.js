@@ -8,7 +8,7 @@ import Product from './pages/Product';
 import ProductList from './pages/ProductList';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminProducts from './pages/AdminProducts';
-import Orders from './pages/Orders';
+import OrderList from './pages/OrderList';
 import Promotions from './pages/Promotions';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route path='/products/:category' element={<ProductList />} />
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/admin/products' element={<AdminProducts />} />
-        <Route path='/admin/orders' element={<Orders />} />
+        <Route path='/admin/orders' element={<OrderList />} />
         <Route path='/admin/promotions' element={<Promotions />} />
       </Routes>
       <Footer />
