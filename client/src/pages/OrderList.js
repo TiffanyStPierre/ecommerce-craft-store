@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import Order from "../components/Order";
+import OrderListItem from "../components/OrderListItem";
 
 export default function OrderList() {
 
@@ -45,7 +45,7 @@ export default function OrderList() {
           </Col>
         </Row>
         {orders.map((order) => (
-          <Order key={order.id} order={order} />
+          <OrderListItem key={order.id} order={order} />
         ))}
       </Container>
       <div className="page-footer-buffer"></div>

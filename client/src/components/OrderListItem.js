@@ -1,6 +1,6 @@
 import { Card, Row, Col } from "react-bootstrap";
 
-export default function Order(props) {
+export default function OrderListItem(props) {
   return (
     <>
       {/* Displayed on smaller screens */}

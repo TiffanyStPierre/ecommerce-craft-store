@@ -10,6 +10,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminProducts from './pages/AdminProducts';
 import OrderList from './pages/OrderList';
 import Promotions from './pages/Promotions';
+import Order from './pages/Order';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/admin/products' element={<AdminProducts />} />
         <Route path='/admin/orders' element={<OrderList />} />
+        <Route path='/order/:id' element={<Order />} />
         <Route path='/admin/promotions' element={<Promotions />} />
       </Routes>
       <Footer />
