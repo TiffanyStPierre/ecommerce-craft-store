@@ -6,6 +6,13 @@ import "../styles/admin.css";
 
 export default function AdminProduct(props) {
 
+  const promotions = props.product.promotions;
+
+  // Check if promotions array exists and has length
+  const promotionNames = promotions && promotions.length
+    ? promotions.map(promotion => promotion.name).join(', ')
+    : "No Promotions";
+
   return (
     <>
       {/* Displayed on smaller screens */}
@@ -38,7 +45,7 @@ export default function AdminProduct(props) {
           {props.product.inventory}
         </Col>
         <Col xs={1} md={2} className="text-center">
-          Promotions
+        {promotionNames}
         </Col>
       </Row>
     </>
