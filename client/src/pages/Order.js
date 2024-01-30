@@ -1,7 +1,8 @@
 export default function Order() {
   return (
-    <div>
-      
-    </div>
+    <>
+      <h2 className="page-subtitle">Admin Dashboard - Order Details</h2>
+      <h3>Customer Order Details</h3>
+    </>
   );
 }
