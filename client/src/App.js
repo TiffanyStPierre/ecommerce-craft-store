@@ -6,6 +6,7 @@ import NavBar from './components/Header';
 import Footer from './components/Footer';
 import Product from './pages/Product';
 import ProductList from './pages/ProductList';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<Product />} />
         <Route path='/products/:category' element={<ProductList />} />
+        <Route path='/admin' element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </Router>

@@ -21,7 +21,9 @@ export default function Header() {
         >
           <div className="w-100">
             <div className="header">
+              <NavLink to="/admin">
               <Button className="custom-button">Admin Dashboard</Button>
+              </NavLink>
               <Navbar.Brand>
                 <NavLink to="/" className="link">
                   <h1>Craft Market</h1>
