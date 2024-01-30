@@ -61,15 +61,15 @@ export default function Header() {
                   </Button>
                 </Form>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <NavLink to="/knitting" className="link mb-4 h4">
+                  <NavLink to="products/knitting" className="link mb-4 h4">
                       30% Off Knitting Sale
                   </NavLink>
-                  <NavLink to="/knitting" className="link mb-2 h5">Knitting</NavLink>
-                  <NavLink to="/sewing" className="link mb-2 h5">Sewing</NavLink>
-                  <NavLink to="/diy-kits" className="link mb-2 h5">DIY Kits</NavLink>
-                  <NavLink to="/painting" className="link mb-2 h5">Painting</NavLink>
-                  <NavLink to="/cross-stitch" className="link mb-2 h5">Cross Stitch</NavLink>
-                  <NavLink to="/kids" className="link mb-2 h5">Kids</NavLink>
+                  <NavLink to="products/knitting" className="link mb-2 h5">Knitting</NavLink>
+                  <NavLink to="products/sewing" className="link mb-2 h5">Sewing</NavLink>
+                  <NavLink to="products/diy-kits" className="link mb-2 h5">DIY Kits</NavLink>
+                  <NavLink to="products/painting" className="link mb-2 h5">Painting</NavLink>
+                  <NavLink to="products/cross-stitch" className="link mb-2 h5">Cross Stitch</NavLink>
+                  <NavLink to="products/kids" className="link mb-2 h5">Kids</NavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

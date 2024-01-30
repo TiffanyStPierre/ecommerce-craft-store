@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get '/products', to: 'products#index'
 
     resources :categories
-    get 'categories/:name', to: 'categories#show'
+    get 'categories/:id', to: 'categories#show'
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do

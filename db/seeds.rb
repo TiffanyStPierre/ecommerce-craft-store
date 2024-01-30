@@ -8,12 +8,12 @@
 
 # Seed Categories
 categories = [
-  { name: 'Knitting & Crochet' },
-  { name: 'Sewing' },
-  { name: 'DIY Kits' },
-  { name: 'Painting' },
-  { name: 'Kids' },
-  { name: 'Cross Stitch' },
+  { name: 'knitting' },
+  { name: 'sewing' },
+  { name: 'diy-kits' },
+  { name: 'painting' },
+  { name: 'kids' },
+  { name: 'cross-stitch' },
 ]
 Category.create(categories)
 
