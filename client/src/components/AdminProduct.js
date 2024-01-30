@@ -19,7 +19,7 @@ export default function AdminProduct(props) {
     <>
       {/* Displayed on smaller screens */}
       <Row className="mb-2 d-md-none mx-auto">
-        <Col xs={8} sm={8} md={8} lg={8} className="mx-auto">
+        <Col xs={10} sm={8} md={8} lg={8} className="mx-auto">
           <Card className="admin-product-card mx-auto">
             <Card.Img variant="top" src={props.product.thumbnail_url} alt={props.product.name} />
             <Card.Body>
