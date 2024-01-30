@@ -10,7 +10,6 @@ export default function AdminProducts() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/products");
-        console.log(response.data);
         setProducts(response.data);
       } catch (error) {
         console.error(error);

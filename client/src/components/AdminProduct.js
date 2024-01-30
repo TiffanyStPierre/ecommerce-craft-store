@@ -13,6 +13,8 @@ export default function AdminProduct(props) {
     ? promotions.map(promotion => promotion.name).join(', ')
     : "No Promotions";
 
+  const category = props.product.categories[0].name;  
+
   return (
     <>
       {/* Displayed on smaller screens */}
@@ -39,7 +41,7 @@ export default function AdminProduct(props) {
           ${props.product.price}
         </Col>
         <Col xs={2} md={2} className="text-center">
-          Category
+          {category}
         </Col>
         <Col xs={1} md={2} className="text-center">
           {props.product.inventory}
