@@ -13,11 +13,7 @@ export default function ProductList() {
         // Construct the API endpoint based on the category
         const apiEndpoint =
           category === "all" ? "/api/products" : `/api/categories/${category}`;
-
-        console.log(apiEndpoint);
-
         const response = await axios.get(apiEndpoint);
-        console.log(response.data);
         setProducts(response.data);
       } catch (error) {
         console.error(error);

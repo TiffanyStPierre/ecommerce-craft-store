@@ -1,8 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 export default function ProductListItem(props) {
   return (
+  <Link to={`/product/${props.product.id}`} className="link">
     <Card style={{ width: '350px', height: '400px' }} className="m-4">
       <Card.Img variant="top" src={props.product.image_url} style={{height: '225px', width: '350px'}}/>
       <Card.Body className="d-flex flex-column align-items-center bg-light">
@@ -13,5 +15,6 @@ export default function ProductListItem(props) {
         <Button className="custom-button mb-2">Details</Button>
       </Card.Body>
     </Card>
+    </Link>
   )
 }
