@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
     resources :categories
     get 'categories/:id', to: 'categories#show'
+
+    resources :orders
+    get '/orders', to: 'orders#index'
+    get '/order/:id', to: 'orders#show'
   end
 
   # Exclude paths starting with /api from the wildcard route
