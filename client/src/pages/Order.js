@@ -1,21 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import OrderLineItem from "../components/OrderLineItem";
 
 export default function Order() {
   const { id } = useParams();
   const [order, setOrder] = useState({
-    id: "",
-    customer_id: "",
+    order: {},
     customer: {},
-    order_date: "",
-    products: [],
-    shipped_date: "",
-    subtotal_amount: "",
-    tax_amount: "",
-    total_amount: "",
-    updated_at: "",
-    created_at: "",
+    products_with_quantity: [],
   });
 
   useEffect(() => {
@@ -64,7 +57,20 @@ export default function Order() {
         </div>
         <div>
           <h4>Items Ordered</h4>
+          <h5>Item</h5>
+          <h5>Quantity</h5>
+          <h5>Price</h5>
+          <h5>Item Subtotal</h5>
         </div>
+        {order.products_with_quantity.map((product, index) => (
+          < OrderLineItem key={index} product={product}/>
+        ))}
+        <h4>Order Subtotal</h4>
+        <h4>${order.order.subtotal_amount}</h4>
+        <h4>Tax</h4>
+        <h4>${order.order.tax_amount}</h4>
+        <h4>Order Total</h4>
+        <h4>${order.order.total_amount}</h4>
       </div>
     </>
   );
