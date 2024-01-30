@@ -11,16 +11,15 @@ export default function Product() {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`/api/product/${id}`);
-        console.log(response.data);
         setProduct(response.data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    // Call the fetchProducts function on page load
+    // Call the fetchProduct function on page load
     fetchProduct();
-  }, [id]); // Include category in the dependency array to re-run the effect when it changes
+  }, [id]);
 
   return (
     <>
