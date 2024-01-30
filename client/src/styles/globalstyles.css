@@ -65,6 +65,23 @@ h4 {
   border: none;
 }
 
+@media (max-width: 800px) {
+  .admin-header-button {
+    font-size: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+}
+
 .link {
   text-decoration: none;
   color: var(--clr-dark)

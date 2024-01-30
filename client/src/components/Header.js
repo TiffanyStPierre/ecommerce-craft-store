@@ -22,13 +22,11 @@ export default function Header() {
           <div className="w-100">
             <div className="header">
               <NavLink to="/admin">
-              <Button className="custom-button">Admin Dashboard</Button>
+                <Button className="custom-button admin-header-button">Admin</Button>
               </NavLink>
-              <Navbar.Brand>
-                <NavLink to="/" className="link">
+                <NavLink to="/" className="link text-center">
                   <h1>Craft Market</h1>
                 </NavLink>
-              </Navbar.Brand>
               <div className="navbar-icons">
                 <FontAwesomeIcon
                   icon={faCartShopping}
@@ -64,14 +62,34 @@ export default function Header() {
                 </Form>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <NavLink to="products/knitting" className="link mb-4 h4">
-                      30% Off Knitting Sale
+                    30% Off Knitting Sale
                   </NavLink>
-                  <NavLink to="products/knitting" className="link mb-2 h5">Knitting</NavLink>
-                  <NavLink to="products/sewing" className="link mb-2 h5">Sewing</NavLink>
-                  <NavLink to="products/diy-kits" className="link mb-2 h5">DIY Kits</NavLink>
-                  <NavLink to="products/painting" className="link mb-2 h5">Painting</NavLink>
-                  <NavLink to="products/cross-stitch" className="link mb-2 h5">Cross Stitch</NavLink>
-                  <NavLink to="products/kids" className="link mb-2 h5">Kids</NavLink>
+                  <NavLink to="products/knitting" className="link mb-2 h5">
+                    Knitting
+                  </NavLink>
+                  <NavLink to="products/sewing" className="link mb-2 h5">
+                    Sewing
+                  </NavLink>
+                  <NavLink to="products/diy-kits" className="link mb-2 h5">
+                    DIY Kits
+                  </NavLink>
+                  <NavLink to="products/painting" className="link mb-2 h5">
+                    Painting
+                  </NavLink>
+                  <NavLink to="products/cross-stitch" className="link mb-2 h5">
+                    Cross Stitch
+                  </NavLink>
+                  <NavLink to="products/kids" className="link mb-2 h5">
+                    Kids
+                  </NavLink>
+                  <NavLink to="#" className="link mt-4 h5">
+                    <FontAwesomeIcon
+                      icon={faCartShopping}
+                      className="menu-icon me-2"
+                      size="1x"
+                    />
+                    View Cart
+                  </NavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
