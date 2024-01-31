@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AdminProduct from "../components/AdminProduct";
-import { Container, Row, Col } from "react-bootstrap";
+import AdminProductItem from "../components/AdminProductItem";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
+  const [fullscreen, setFullscreen] = useState(true);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,10 +22,21 @@ export default function AdminProducts() {
     fetchProducts();
   }, []);
 
+  const showProductModal = (breakpoint) => {
+    setFullscreen(breakpoint);
+    setShow(true);
+  }
+
   return (
     <>
       <h2 className="page-subtitle">Admin Dashboard - Products</h2>
       <h3>Products</h3>
+      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Modal body content</Modal.Body>
+      </Modal>
       <Container className="mt-5 px-5 container-border">
         <Row className="d-none d-md-flex align-items-center pt-4 pb-2">
           <Col style={{ width: "100px" }} className="text-center h5">
@@ -46,7 +59,7 @@ export default function AdminProducts() {
           </Col>
         </Row>
         {products.map((product) => (
-          <AdminProduct key={product.id} product={product} />
+          <AdminProductItem key={product.id} product={product} onClick={showProductModal} />
         ))}
       </Container>
       <div className="page-footer-buffer"></div>

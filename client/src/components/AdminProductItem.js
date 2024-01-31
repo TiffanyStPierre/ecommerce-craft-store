@@ -4,7 +4,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Card, Col, Row } from "react-bootstrap";
 import "../styles/admin.css";
 
-export default function AdminProduct(props) {
+export default function AdminProductItem(props) {
 
   const promotions = props.product.promotions;
 
@@ -13,12 +13,13 @@ export default function AdminProduct(props) {
     ? promotions.map(promotion => promotion.name).join(', ')
     : "No Promotions";
 
-  const category = props.product.categories[0].name;  
+  const category = props.product.categories[0].name;
 
   return (
     <>
       {/* Displayed on smaller screens */}
-      <Row className="mb-2 d-md-none mx-auto">
+
+      <Row className="mb-2 d-md-none mx-auto admin-product-item" onClick={() => props.onClick('sm-down')}>
         <Col xs={10} sm={8} md={8} lg={8} className="mx-auto">
           <Card className="admin-product-card mx-auto">
             <Card.Img variant="top" src={props.product.thumbnail_url} alt={props.product.name} />
@@ -30,7 +31,7 @@ export default function AdminProduct(props) {
         </Col>
       </Row>
       {/* Displayed on larger screens */}
-      <Row className="mb-3 d-none d-md-flex align-items-center border rounded p-2">
+      <Row className="mb-3 d-none d-md-flex align-items-center border rounded p-2 admin-product-item" onClick={() => props.onClick('sm-down')}>
         <Col xs={3} md={2} className="text-center">
           <img src={props.product.thumbnail_url} alt={props.product.name} style={{ height: "100%", width: "100%", objectFit: "cover" }} className="rounded-circle" />
         </Col>
