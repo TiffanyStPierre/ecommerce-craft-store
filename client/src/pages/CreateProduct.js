@@ -11,7 +11,7 @@ export default function CreateProduct() {
   const [productData, setProductData] = useState({
     name: "",
     description: "",
-    price: null,
+    price: 0,
     category: "",
     image_url: "",
     thumbnail_url: "",
@@ -24,10 +24,29 @@ export default function CreateProduct() {
   const { name, description, price, category, image_url, thumbnail_url } =
     productData;
 
+  // Use useEffect to set the initial category value when categories change
+  useEffect(() => {
+    if (categories.length > 0) {
+      setProductData((prevState) => ({
+        ...prevState,
+        category: categories[0].name, // Set to the name of the first category
+      }));
+    }
+  }, [categories]);
+
   const onChange = (e) => {
     setProductData((prevState) => ({
       ...prevState,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
+    }));
+    console.log(productData);
+  };
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setProductData((prevState) => ({
+      ...prevState,
+      category: selectedCategory,
     }));
   };
 
@@ -44,11 +63,19 @@ export default function CreateProduct() {
     e.preventDefault();
 
     axios
-      .post("/api/product/new", { productData })
+      .post("/api/product/new", productData)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           handleShow();
           setFormError(false);
+          setProductData({
+            name: "",
+            description: "",
+            price: 0,
+            category: "",
+            image_url: "",
+            thumbnail_url: "",
+          })
         } else {
           setFormError(true);
         }
@@ -152,7 +179,7 @@ export default function CreateProduct() {
             aria-label="Category select"
             name="category"
             value={category}
-            onChange={onChange}
+            onChange={handleCategoryChange}
           >
             {categories &&
               categories.map((cat) => <option key={cat.id}>{cat.name}</option>)}
