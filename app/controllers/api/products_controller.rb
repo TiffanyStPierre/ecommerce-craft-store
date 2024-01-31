@@ -22,14 +22,16 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
+    puts "Received params: #{params.inspect}"
     product = Product.new(product_params)
-
+  
     # Find or create the category by name
-    category_name = product_params[:category]
-    category = Category.find_or_create_by(name: category_name)
-
+    category_name = params[:category]
+    puts "Category Name: #{category_name}" # Add this line for debugging
+    category = Category.find_by(name: category_name)
+  
     product.categories << category
-
+  
     if product.save
       render json: product, include: [:categories, :promotions], status: :created
     else
@@ -44,7 +46,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :inventory, :category, :image_url, :thumbnail_url)
+    params.require(:product).permit(:name, :description, :price, :category, :inventory, :image_url, :thumbnail_url)
   end
 
 end
