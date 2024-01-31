@@ -44,7 +44,7 @@ export default function CreateProduct() {
     e.preventDefault();
 
     axios
-      .post("/product/new", { productData })
+      .post("/api/product/new", { productData })
       .then((response) => {
         if (response.status === 200) {
           handleShow();
@@ -138,6 +138,9 @@ export default function CreateProduct() {
             value={price}
             onChange={onChange}
           />
+          <Form.Text className="text-muted">
+            Enter a number here. No dollar sign.
+          </Form.Text>
         </Form.Group>
 
         <Form.Group
@@ -152,7 +155,7 @@ export default function CreateProduct() {
             onChange={onChange}
           >
             {categories &&
-              categories.map((category) => <option>{category.name}</option>)}
+              categories.map((cat) => <option key={cat.id}>{cat.name}</option>)}
           </Form.Select>
         </Form.Group>
 
