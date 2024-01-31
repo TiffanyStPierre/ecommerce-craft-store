@@ -12,6 +12,7 @@ export default function CreateProduct() {
     name: "",
     description: "",
     price: 0,
+    inventory: 0,
     category: "",
     image_url: "",
     thumbnail_url: "",
@@ -21,7 +22,7 @@ export default function CreateProduct() {
 
   const navigate = useNavigate();
 
-  const { name, description, price, category, image_url, thumbnail_url } =
+  const { name, description, price, inventory, category, image_url, thumbnail_url } =
     productData;
 
   // Use useEffect to set the initial category value when categories change
@@ -39,7 +40,6 @@ export default function CreateProduct() {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(productData);
   };
 
   const handleCategoryChange = (e) => {
@@ -72,6 +72,7 @@ export default function CreateProduct() {
             name: "",
             description: "",
             price: 0,
+            inventory: 0,
             category: "",
             image_url: "",
             thumbnail_url: "",
@@ -168,6 +169,16 @@ export default function CreateProduct() {
           <Form.Text className="text-muted">
             Enter a number here. No dollar sign.
           </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-4 form-input-group mx-auto" controlId="inventory">
+          <Form.Label>Inventory</Form.Label>
+          <Form.Control
+            type="number"
+            name="inventory"
+            value={inventory}
+            onChange={onChange}
+          />
         </Form.Group>
 
         <Form.Group
