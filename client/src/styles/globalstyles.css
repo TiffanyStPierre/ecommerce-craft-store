@@ -87,6 +87,12 @@ h4 {
   color: var(--clr-dark)
 }
 
+.form-input-group {
+  width: 30rem;
+  max-width: 95%;
+  
+}
+
 .page-subtitle,
 .page-footer-buffer {
   background-color: var(--clr-accent);
