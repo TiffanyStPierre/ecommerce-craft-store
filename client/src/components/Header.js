@@ -6,10 +6,31 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 import "../styles/header.css";
 
 export default function Header() {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchParams((prevParams) => ({ ...prevParams, q: value }));
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`/api/search`, { params: searchParams });
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       {[false].map((expand) => (
@@ -55,8 +76,10 @@ export default function Header() {
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    id="search"
+                    onChange={handleChange}
                   />
-                  <Button className="custom-button">
+                  <Button className="custom-button" onClick={handleSubmit}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                   </Button>
                 </Form>
