@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminProductItem from "../components/AdminProductItem";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,25 +27,65 @@ export default function AdminProducts() {
     fetchProducts();
   }, []);
 
-  const showProductModal = (breakpoint) => {
+  const showProductModal = (breakpoint, product, promotionNames) => {
     setFullscreen(breakpoint);
+    setSelectedProduct({ ...product, promotionNames });
     setShow(true);
-  }
+  };
 
   return (
     <>
       <h2 className="page-subtitle">Admin Dashboard - Products</h2>
       <h3>Products</h3>
-      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+      <Modal
+        size="lg"
+        show={show}
+        fullscreen={fullscreen}
+        onHide={() => setShow(false)}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Modal</Modal.Title>
+          <Modal.Title>
+            {selectedProduct ? selectedProduct.name : "Product Details"}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Modal body content</Modal.Body>
+        <Modal.Body>
+          {selectedProduct && (
+            <div className="m-5">
+              <div className="d-flex">
+                <img
+                  src={selectedProduct.thumbnail_url}
+                  alt={selectedProduct.name}
+                  className="rounded me-5 mb-4"
+                />
+                <div className="ms-5">
+                  <p className="mb-2">Product #: {selectedProduct.id}</p>
+                  <p className="mb-2">Price: ${selectedProduct.price}</p>
+                  <p className="mb-2">Category: {selectedProduct.categories[0].name}</p>
+                  <p className="mb-2">Inventory: {selectedProduct.inventory}</p>
+                  <p className="mb-2">Promotions: {selectedProduct.promotionNames}</p>
+                </div>
+              </div>
+              <p>{selectedProduct.description}</p>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          {selectedProduct && (
+            <Link to={`/edit-product/${selectedProduct.id}`}>
+              <Button className="custom-button">
+                <FontAwesomeIcon icon={faPen} />
+              </Button>
+              <Button variant="danger" className="ms-3">
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+            </Link>
+          )}
+        </Modal.Footer>
       </Modal>
       <Container className="mt-5 px-5 container-border">
         <Row className="d-none d-md-flex align-items-center pt-4 pb-2">
           <Col style={{ width: "100px" }} className="text-center h5">
-          <strong>Image</strong>
+            <strong>Image</strong>
           </Col>
           <Col className="text-center h5">
             <strong>Name</strong>
@@ -59,7 +104,11 @@ export default function AdminProducts() {
           </Col>
         </Row>
         {products.map((product) => (
-          <AdminProductItem key={product.id} product={product} onClick={showProductModal} />
+          <AdminProductItem
+            key={product.id}
+            product={product}
+            onClick={(bp, promotions) => showProductModal(bp, product, promotions)}
+          />
         ))}
       </Container>
       <div className="page-footer-buffer"></div>
