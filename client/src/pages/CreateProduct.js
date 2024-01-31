@@ -1,7 +1,25 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 export default function CreateProduct() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/api/categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    // Call the fetchCategories function on page load
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <h2 className="page-subtitle">Admin - New Product</h2>
@@ -24,10 +42,8 @@ export default function CreateProduct() {
         <Form.Group>
           <Form.Label>Product Category</Form.Label>
           <Form.Select aria-label="Default select example">
-            <option>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {categories &&
+              categories.map((category) => <option>{category.name}</option>)}
           </Form.Select>
         </Form.Group>
 
