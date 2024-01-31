@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     get '/search', to: 'products#search'
 
     resources :categories
-    get 'categories/:id', to: 'categories#show'
+    get '/categories', to: 'categories#index'
+    get '/categories/:id', to: 'categories#show'
 
     resources :orders
     get '/orders', to: 'orders#index'
