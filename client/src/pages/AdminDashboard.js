@@ -34,6 +34,7 @@ export default function AdminDashboard() {
           </Card>
         </Link>
       </div>
+      <div className="page-footer-buffer"></div>
     </>
   );
 }
