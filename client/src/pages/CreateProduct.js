@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import Alert from "react-bootstrap/Alert";
 
 export default function CreateProduct() {
   const [categories, setCategories] = useState([]);
@@ -13,6 +16,10 @@ export default function CreateProduct() {
     imageUrl: "",
     thumbnailUrl: "",
   });
+  const [show, setShow] = useState(false);
+  const [formError, setFormError] = useState(false);
+
+  const navigate = useNavigate();
 
   const { name, description, price, category, imageUrl, thumbnailUrl } =
     productData;
@@ -24,8 +31,31 @@ export default function CreateProduct() {
     }));
   };
 
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    navigate("/admin/products");
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+
+    axios
+      .post("/product/new", { productData })
+      .then((response) => {
+        if (response.status === 200) {
+          handleShow();
+          setFormError(false);
+        } else {
+          setFormError(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   };
 
   useEffect(() => {
@@ -46,6 +76,34 @@ export default function CreateProduct() {
     <>
       <h2 className="page-subtitle">Admin - New Product</h2>
       <h3 className="mb-5">Create New Product</h3>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Product Created</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="postForm.ControlTextarea">
+              <Form.Label>
+                Your new product was successfully created.
+              </Form.Label>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      {formError && (
+        <Alert variant="danger" className="text-center">
+          There was a problem creating your product. Please make sure all fields
+          are filled in and try again.
+        </Alert>
+      )}
+
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-4 form-input-group mx-auto" controlId="name">
           <Form.Label>Product Name</Form.Label>
@@ -131,11 +189,21 @@ export default function CreateProduct() {
           </Form.Text>
         </Form.Group>
         <div className="text-center">
-          <Button variant="primary" type="submit" className="custom-button mt-5">
+          <Button
+            variant="primary"
+            type="submit"
+            className="custom-button mt-5"
+          >
             Create Product
           </Button>
         </div>
       </Form>
+      {formError && (
+        <Alert variant="danger" className="text-center mt-4">
+          There was a problem creating your product. Please make sure all fields
+          are filled in and try again.
+        </Alert>
+      )}
       <div className="page-footer-buffer"></div>
     </>
   );
