@@ -10,6 +10,7 @@ import AdminProducts from "./pages/AdminProducts";
 import OrderList from "./pages/OrderList";
 import Promotions from "./pages/Promotions";
 import Order from "./pages/Order";
+import CreateProduct from "./pages/CreateProduct";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product/new" element={<CreateProduct />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/searchresults" element={<ProductList />} />

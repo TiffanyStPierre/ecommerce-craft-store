@@ -37,6 +37,13 @@ export default function AdminProducts() {
     <>
       <h2 className="page-subtitle">Admin Dashboard - Products</h2>
       <h3>Products</h3>
+      <div className="text-center mt-5">
+        <Link to="/product/new" className="link">
+          <Button className="custom-button" size="lg">
+            Add Product
+          </Button>
+        </Link>
+      </div>
       <Modal
         size="lg"
         show={show}
@@ -60,9 +67,13 @@ export default function AdminProducts() {
                 <div className="ms-5">
                   <p className="mb-2">Product #: {selectedProduct.id}</p>
                   <p className="mb-2">Price: ${selectedProduct.price}</p>
-                  <p className="mb-2">Category: {selectedProduct.categories[0].name}</p>
+                  <p className="mb-2">
+                    Category: {selectedProduct.categories[0].name}
+                  </p>
                   <p className="mb-2">Inventory: {selectedProduct.inventory}</p>
-                  <p className="mb-2">Promotions: {selectedProduct.promotionNames}</p>
+                  <p className="mb-2">
+                    Promotions: {selectedProduct.promotionNames}
+                  </p>
                 </div>
               </div>
               <p>{selectedProduct.description}</p>
@@ -107,7 +118,9 @@ export default function AdminProducts() {
           <AdminProductItem
             key={product.id}
             product={product}
-            onClick={(bp, promotions) => showProductModal(bp, product, promotions)}
+            onClick={(bp, promotions) =>
+              showProductModal(bp, product, promotions)
+            }
           />
         ))}
       </Container>
