@@ -21,10 +21,18 @@ class Api::ProductsController < ApplicationController
     render json: @product, include: [:categories, :promotions]
   end
 
+  def create
+    product = Product.new(product_params)
+  end
+
   private
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :description, :price, :category, :image_url, :thumbnail_url)
   end
 
 end
