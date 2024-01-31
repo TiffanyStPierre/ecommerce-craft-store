@@ -25,6 +25,7 @@ export default function Header() {
     e.preventDefault();
     try {
       const response = await axios.get(`/api/search`, { params: searchParams });
+      console.log(response.data);
       setSearchResults(response.data);
     } catch (error) {
       console.error(error);

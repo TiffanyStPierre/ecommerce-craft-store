@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :products
     get '/products', to: 'products#index'
     get '/product/:id', to: 'products#show'
+    get '/search', to: 'products#search'
 
     resources :categories
     get 'categories/:id', to: 'categories#show'

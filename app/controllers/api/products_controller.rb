@@ -7,6 +7,15 @@ class Api::ProductsController < ApplicationController
     render json: @products, include: [:categories, :promotions]
   end
 
+  def search
+    query = "%#{params[:q]}%"
+    @products = Product
+      .joins(:categories)
+      .where("products.name ILIKE ? OR categories.name ILIKE ?", query, query)
+      .distinct
+    render json: @products, include: [:categories, :promotions]
+  end
+
   def show
     # already set by the before_action
     render json: @product, include: [:categories, :promotions]
