@@ -13,15 +13,15 @@ export default function CreateProduct() {
     description: "",
     price: null,
     category: "",
-    imageUrl: "",
-    thumbnailUrl: "",
+    image_url: "",
+    thumbnail_url: "",
   });
   const [show, setShow] = useState(false);
   const [formError, setFormError] = useState(false);
 
   const navigate = useNavigate();
 
-  const { name, description, price, category, imageUrl, thumbnailUrl } =
+  const { name, description, price, category, image_url, thumbnail_url } =
     productData;
 
   const onChange = (e) => {
@@ -158,13 +158,13 @@ export default function CreateProduct() {
 
         <Form.Group
           className="mb-4 form-input-group mx-auto"
-          controlId="imageUrl"
+          controlId="image_url"
         >
           <Form.Label>Product Image URL</Form.Label>
           <Form.Control
             type="text"
-            name="imageUrl"
-            value={imageUrl}
+            name="image_url"
+            value={image_url}
             onChange={onChange}
           />
           <Form.Text className="text-muted">
@@ -174,13 +174,13 @@ export default function CreateProduct() {
 
         <Form.Group
           className="mb-4 form-input-group mx-auto"
-          controlId="thumbnailUrl"
+          controlId="thumbnail_url"
         >
           <Form.Label>Thumbnail Image URL</Form.Label>
           <Form.Control
             type="text"
-            name="thumbnailUrl"
-            value={thumbnailUrl}
+            name="thumbnail_url"
+            value={thumbnail_url}
             onChange={onChange}
           />
           <Form.Text className="text-muted">

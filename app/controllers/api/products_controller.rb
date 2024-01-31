@@ -23,6 +23,18 @@ class Api::ProductsController < ApplicationController
 
   def create
     product = Product.new(product_params)
+
+    # Find or create the category by name
+    category_name = product_params[:category]
+    category = Category.find_or_create_by(name: category_name)
+
+    product.categories << category
+
+    if product.save
+      render json: product, include: [:categories, :promotions], status: :created
+    else
+      render json: { error: product.errors.full_messages.join(', ') }, status: :unprocessable_entity
+    end
   end
 
   private
