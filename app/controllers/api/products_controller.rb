@@ -3,7 +3,7 @@ class Api::ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all.includes(:categories, :promotions)
+    @products = Product.all.includes(:categories, :promotions).order(created_at: :desc)
     render json: @products, include: [:categories, :promotions]
   end
 
