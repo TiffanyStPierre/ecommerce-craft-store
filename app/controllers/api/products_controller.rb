@@ -39,6 +39,11 @@ class Api::ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+  end
+
   private
 
   def set_product
