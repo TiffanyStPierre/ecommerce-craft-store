@@ -32,6 +32,7 @@ export default function Product() {
           <Button className="custom-button my-4">Add to Cart</Button>
         </div>
       </div>
+      <p className="w-50 mx-auto mb-5 h6">{product.description}</p>
       <h4>Similar products you may like</h4>
       <div className="page-footer-buffer"></div>
     </>

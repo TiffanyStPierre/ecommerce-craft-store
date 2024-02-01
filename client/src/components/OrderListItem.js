@@ -6,7 +6,7 @@ export default function OrderListItem(props) {
     <>
       {/* Displayed on smaller screens */}
       <Link to={`/order/${props.order.id}`} className="link">
-        <Row className="mb-2 d-md-none mx-auto">
+        <Row className="mb-2 d-md-none mx-auto admin-order-item">
           <Col xs={10} sm={8} md={8} lg={8} className="mx-auto">
             <Card className="mx-auto">
               <Card.Body>
@@ -27,7 +27,7 @@ export default function OrderListItem(props) {
       </Link>
       {/* Displayed on larger screens */}
       <Link to={`/order/${props.order.id}`} className="link">
-        <Row className="mb-3 d-none d-md-flex align-items-center border rounded p-2">
+        <Row className="mb-3 d-none d-md-flex align-items-center border rounded p-2 admin-order-item">
           <Col xs={2} md={2} className="text-center">
             {props.order.id}
           </Col>

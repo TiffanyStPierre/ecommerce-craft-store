@@ -12,7 +12,8 @@
   border-radius: 10px;
 }
 
-.admin-product-item:hover {
+.admin-product-item:hover,
+.admin-order-item:hover {
   background-color: #d3d3d3;
 }
 
