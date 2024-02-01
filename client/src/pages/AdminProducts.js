@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminProductItem from "../components/AdminProductItem";
-import { Container, Row, Col, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ export default function AdminProducts() {
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,6 +32,27 @@ export default function AdminProducts() {
     setFullscreen(breakpoint);
     setSelectedProduct({ ...product, promotionNames });
     setShow(true);
+  };
+
+  const deleteProductConfirm = () => {
+    setConfirmDelete(true);
+  }
+
+  const deleteProduct = async () => {
+    try {
+      const productId = selectedProduct.id;
+
+      await axios.delete(`/api/product/${productId}`);
+
+      setProducts((prevProducts) => 
+      prevProducts.filter((product) => product.id !== productId)
+      );
+
+      setShow(false);
+      setConfirmDelete(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -82,14 +104,23 @@ export default function AdminProducts() {
         </Modal.Body>
         <Modal.Footer>
           {selectedProduct && (
-            <Link to={`/edit-product/${selectedProduct.id}`}>
-              <Button className="custom-button">
-                <FontAwesomeIcon icon={faPen} />
-              </Button>
-              <Button variant="danger" className="ms-3">
+            <>
+            {confirmDelete && (
+              <Alert variant="danger" className="me-5">
+                Are you sure you want to delete this product?
+                <Button variant="outline-danger" className="ms-4" onClick={deleteProduct}>Yes</Button>
+                <Button variant="outline-danger" className="ms-4" onClick={() => setConfirmDelete(false)}>No</Button>
+                </Alert>
+            )}
+              <Link to={`/edit-product/${selectedProduct.id}`}>
+                <Button className="custom-button">
+                  <FontAwesomeIcon icon={faPen} />
+                </Button>
+              </Link>
+              <Button variant="danger" className="ms-3" onClick={deleteProductConfirm}>
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
-            </Link>
+            </>
           )}
         </Modal.Footer>
       </Modal>
