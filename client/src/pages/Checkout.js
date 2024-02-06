@@ -127,6 +127,36 @@ export default function Checkout() {
         </div>
         <div>
           <h4>Credit Card Information</h4>
+          <Form.Group
+            className="mb-4 form-input-group mx-auto"
+            controlId="credit_card"
+          >
+            <Form.Label>Credit Card Number</Form.Label>
+            <Form.Control
+              type="text"
+              name="credit_card"
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-4 form-input-group mx-auto"
+            controlId="expiry_date"
+          >
+            <Form.Label>Expiry Date mm/yy</Form.Label>
+            <Form.Control
+              type="text"
+              name="expiry_date"
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-4 form-input-group mx-auto"
+            controlId="cvc"
+          >
+            <Form.Label>CVC</Form.Label>
+            <Form.Control
+              type="text"
+              name="cvc"
+            />
+          </Form.Group>
         </div>
         <div>
           <p className="h2">Order Total</p>
