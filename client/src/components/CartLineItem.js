@@ -1,20 +1,43 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { useContext } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus } from "@fortawesome/free-solid-svg-icons";
+import { CartContext } from "../context/CartContext";
 
 export default function CartLineItem(props) {
+  const { addToCart, removeFromCart } = useContext(CartContext);
+
   return (
     <Container>
       <Row>
-        <Col xs={3} md={2}><img
+        <Col xs={3} md={2}>
+          <img
             src={props.product.thumbnail_url}
             alt={props.product.name}
             style={{ height: "100%", width: "100%", objectFit: "cover" }}
             className="rounded-circle"
-          /></Col>
+          />
+        </Col>
         <Col>{props.product.name}</Col>
         <Col>{props.product.quantity}</Col>
         <Col>${props.product.price}</Col>
         <Col>${props.product.quantity * props.product.price}</Col>
+        <Col>
+          <Button 
+          className="custom-button"
+          onClick={() => addToCart(props.product)}>
+            <FontAwesomeIcon icon={faPlus} />
+          </Button>
+          <Button
+            variant="danger"
+            className="ms-3"
+            onClick={() => removeFromCart(props.product)}
+          >
+            <FontAwesomeIcon icon={faMinus} />
+          </Button>
+        </Col>
       </Row>
     </Container>
   );
