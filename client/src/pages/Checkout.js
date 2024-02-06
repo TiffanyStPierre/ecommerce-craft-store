@@ -38,8 +38,8 @@ export default function Checkout() {
       <h2 className="page-subtitle">Check Out</h2>
       <h3>Enter Payment & Address Information</h3>
       <Form>
-        <div>
-          <h4>Shipping Information</h4>
+        <div className="mt-4 container-border text-center mx-auto" style={{ width: "40%" }}>
+          <h4 className="my-4">Shipping Information</h4>
           <Form.Group
             className="mb-4 form-input-group mx-auto"
             controlId="first_name"
@@ -125,8 +125,8 @@ export default function Checkout() {
             />
           </Form.Group>
         </div>
-        <div>
-          <h4>Credit Card Information</h4>
+        <div className="my-5 container-border text-center mx-auto" style={{ width: "40%" }}>
+          <h4 className="my-4">Credit Card Information</h4>
           <Form.Group
             className="mb-4 form-input-group mx-auto"
             controlId="credit_card"
@@ -158,13 +158,15 @@ export default function Checkout() {
             />
           </Form.Group>
         </div>
-        <div>
+        <div className="text-center">
           <p className="h2">Order Total</p>
           <p className="h2">{`$${getOrderTotal()}`}</p>
+          <div>
           <Button className="custom-button">Submit Order</Button>
           <Link to="/cart">
             <Button variant="outline-dark">Back to Cart</Button>
           </Link>
+          </div>
         </div>
       </Form>
       <div className="page-footer-buffer"></div>
