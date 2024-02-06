@@ -6,11 +6,13 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/reset.css";
 import "./styles/globalstyles.css";
+import { CartProvider } from "./context/CartContext";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
   </Router>
 );
 

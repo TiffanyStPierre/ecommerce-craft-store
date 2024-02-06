@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
+import { CartContext } from "../context/CartContext";
 
 export default function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const { cartItems, addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -29,7 +31,7 @@ export default function Product() {
         <div className="d-flex flex-column align-items-start" style={{ width: "45%" }}>
           <h3>{product.name}</h3>
           <h3 className="my-1">${product.price}</h3>
-          <Button className="custom-button my-4">Add to Cart</Button>
+          <Button className="custom-button my-4" onClick={() => addToCart(product)}>Add to Cart</Button>
         </div>
       </div>
       <p className="w-50 mx-auto mb-5 h6">{product.description}</p>
