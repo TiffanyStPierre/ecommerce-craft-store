@@ -15,12 +15,12 @@ export const CartProvider = ({ children }) => {
       setCartItems(
         cartItems.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            ? { ...cartItem, quantity: cartItem.quantity + 1 } // if the item is already in the cart, increase the quantity of the item
             : cartItem
         )
       );
     } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+      setCartItems([...cartItems, { ...item, quantity: 1 }]); // if the item is not in the cart, add the item to the cart
     }
   };
 
@@ -44,6 +44,24 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
+  const getOrderSubtotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
+const getOrderTax = () => {
+    const subtotal = getOrderSubtotal();
+    const taxRate = 0.05;
+    const tax = subtotal * taxRate;
+    return tax.toFixed(2);
+};
+
+const getOrderTotal = () => {
+    const subtotal = getOrderSubtotal();
+    const tax = parseFloat(getOrderTax());
+    const total = subtotal + tax;
+    return total.toFixed(2);
+};
+
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -62,6 +80,9 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         clearCart,
+        getOrderTotal,
+        getOrderSubtotal,
+        getOrderTax,
       }}
     >
       {children}
