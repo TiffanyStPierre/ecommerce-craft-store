@@ -69,11 +69,13 @@ export default function Header() {
                 <h1>Craft Market</h1>
               </NavLink>
               <div className="navbar-icons">
-                <FontAwesomeIcon
-                  icon={faCartShopping}
-                  className="navbar-icon"
-                  size="2x"
-                />
+                <NavLink to="/cart">
+                  <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="navbar-icon"
+                    size="2x"
+                  />
+                </NavLink>
                 <Navbar.Toggle
                   onClick={() => setOffcanvasShow(!offcanvasShow)} // Toggle Offcanvas show state
                   aria-controls={`offcanvasNavbar-expand-${expand}`}
@@ -115,7 +117,9 @@ export default function Header() {
                 </Form>
 
                 {showNoResults && (
-                  <Alert className="danger">No products found. Please search again.</Alert>
+                  <Alert className="danger">
+                    No products found. Please search again.
+                  </Alert>
                 )}
 
                 <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -140,7 +144,7 @@ export default function Header() {
                   <NavLink to="products/kids" className="link mb-2 h5">
                     Kids
                   </NavLink>
-                  <NavLink to="#" className="link mt-4 h5">
+                  <NavLink to="/cart" className="link mt-4 h5">
                     <FontAwesomeIcon
                       icon={faCartShopping}
                       className="menu-icon me-2"
