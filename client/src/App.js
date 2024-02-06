@@ -12,6 +12,7 @@ import Promotions from "./pages/Promotions";
 import Order from "./pages/Order";
 import CreateProduct from "./pages/CreateProduct";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/searchresults" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/orders" element={<OrderList />} />
