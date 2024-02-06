@@ -31,6 +31,9 @@ export default function Cart() {
         <Link to="/checkout">
           <Button className="custom-button me-3">Checkout</Button>
         </Link>
+        <Link to="/">
+          <Button className="custom-button">Continue Shopping</Button>
+        </Link>
         <Button
           variant="outline-dark"
           className="ms-3"
