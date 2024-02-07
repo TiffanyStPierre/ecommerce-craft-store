@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Itim&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 *,
 *::before,
@@ -9,12 +9,12 @@
 /* Custom Properties */
 
 :root {
-  --ff-primary: 'Inter', sans-serif;
-  --ff-title: 'Lato', sans-serif;
-  --ff-slogan: 'Itim', cursive;
+  --ff-primary: "Inter", sans-serif;
+  --ff-title: "Lato", sans-serif;
+  --ff-slogan: "Itim", cursive;
 
-  --clr-dark: #211C1E;
-  --clr-accent: #3A4966;
+  --clr-dark: #211c1e;
+  --clr-accent: #3a4966;
   --clr-light: #ffffff;
 }
 
@@ -79,18 +79,16 @@ h4 {
     padding: 1rem;
     text-align: center;
   }
-
 }
 
 .link {
   text-decoration: none;
-  color: var(--clr-dark)
+  color: var(--clr-dark);
 }
 
 .form-input-group {
   width: 30rem;
   max-width: 95%;
-  
 }
 
 .page-subtitle,
@@ -101,4 +99,47 @@ h4 {
 .page-footer-buffer {
   height: 2rem;
   margin-top: 3rem;
+}
+
+.loader {
+  width: 50px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #514b82;
+  -webkit-mask: repeating-conic-gradient(
+      #0000 0deg,
+      #000 1deg 70deg,
+      #0000 71deg 90deg
+    ),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+
+  mask: repeating-conic-gradient(#0000 0deg, #000 1deg 70deg, #0000 71deg 90deg),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
+  animation: l5 1s infinite;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes l5 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+@keyframes l30 {
+  100% {
+    transform: rotate(-1turn);
+  }
 }

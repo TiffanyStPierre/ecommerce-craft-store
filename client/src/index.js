@@ -7,11 +7,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/reset.css";
 import "./styles/globalstyles.css";
 import { CartProvider } from "./context/CartContext";
+import { LoadingProvider } from "./context/LoadingContext";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
     <CartProvider>
-      <App />
+      <LoadingProvider>
+        <App />
+      </LoadingProvider>
     </CartProvider>
   </Router>
 );
