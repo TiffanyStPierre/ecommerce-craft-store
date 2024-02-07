@@ -22,12 +22,10 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    puts "Received params: #{params.inspect}"
     product = Product.new(product_params)
   
-    # Find or create the category by name
+    # Find the category by name
     category_name = params[:category]
-    puts "Category Name: #{category_name}" # Add this line for debugging
     category = Category.find_by(name: category_name)
   
     product.categories << category

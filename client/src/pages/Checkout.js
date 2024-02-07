@@ -5,7 +5,7 @@ import { Button, Form, Modal, Alert } from "react-bootstrap";
 import axios from "axios";
 
 export default function Checkout() {
-  const { cartItems, getOrderTotal, getOrderSubtotal, getOrderTax } =
+  const { cartItems, getOrderTotal, getOrderSubtotal, getOrderTax, clearCart } =
     useContext(CartContext);
   const [checkoutData, setCheckoutData] = useState({
     first_name: "",
@@ -52,12 +52,17 @@ export default function Checkout() {
     e.preventDefault();
 
     const orderData = {
-      customer: checkoutData,
-      cartItems: cartItems.map(item => ({
-        id: item.id,
-        quantity: item.quantity
-      }))
-    }
+      order: {
+        customer: checkoutData,
+        cartItems: cartItems.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+        })),
+        subtotal_amount: getOrderSubtotal(),
+        tax_amount: getOrderTax(),
+        total_amount: getOrderTotal(),
+      },
+    };
 
     axios
       .post("/api/order/new", orderData)
@@ -65,6 +70,16 @@ export default function Checkout() {
         if (response.status === 200 || response.status === 201) {
           handleShow();
           setFormError(false);
+          clearCart();
+          setCheckoutData({
+            first_name: "",
+            last_name: "",
+            email: "",
+            street_address: "",
+            city: "",
+            province: "",
+            postal_code: "",
+          });
         } else {
           setFormError(true);
         }
@@ -72,7 +87,7 @@ export default function Checkout() {
       .catch((error) => {
         console.error(error.message);
       });
-  }
+  };
 
   return (
     <>
@@ -92,7 +107,8 @@ export default function Checkout() {
           <Form>
             <Form.Group className="mb-3" controlId="postForm.ControlTextarea">
               <Form.Label>
-                Your order was submitted. We will send you an email confirmation with your order details.
+                Your order was submitted. We will send you an email confirmation
+                with your order details.
               </Form.Label>
             </Form.Group>
           </Form>
@@ -107,7 +123,10 @@ export default function Checkout() {
       )}
 
       <Form onSubmit={onSubmit}>
-        <div className="mt-4 container-border text-center mx-auto" style={{ width: "40%" }}>
+        <div
+          className="mt-4 container-border text-center mx-auto"
+          style={{ width: "40%" }}
+        >
           <h4 className="my-4">Shipping Information</h4>
           <Form.Group
             className="mb-4 form-input-group mx-auto"
@@ -194,48 +213,46 @@ export default function Checkout() {
             />
           </Form.Group>
         </div>
-        <div className="my-5 container-border text-center mx-auto" style={{ width: "40%" }}>
+        <div
+          className="my-5 container-border text-center mx-auto"
+          style={{ width: "40%" }}
+        >
           <h4 className="mt-4">Credit Card Information</h4>
-          <Form.Text>Note: This is not a real store and credit card information is not required to submit the form</Form.Text>
+          <Form.Text>
+            Note: This is not a real store and credit card information is not
+            required to submit the form
+          </Form.Text>
           <Form.Group
             className="my-4 form-input-group mx-auto"
             controlId="credit_card"
           >
             <Form.Label>Credit Card Number</Form.Label>
-            <Form.Control
-              type="text"
-              name="credit_card"
-            />
+            <Form.Control type="text" name="credit_card" />
           </Form.Group>
           <Form.Group
             className="mb-4 form-input-group mx-auto"
             controlId="expiry_date"
           >
             <Form.Label>Expiry Date mm/yy</Form.Label>
-            <Form.Control
-              type="text"
-              name="expiry_date"
-            />
+            <Form.Control type="text" name="expiry_date" />
           </Form.Group>
-          <Form.Group
-            className="mb-4 form-input-group mx-auto"
-            controlId="cvc"
-          >
+          <Form.Group className="mb-4 form-input-group mx-auto" controlId="cvc">
             <Form.Label>CVC</Form.Label>
-            <Form.Control
-              type="text"
-              name="cvc"
-            />
+            <Form.Control type="text" name="cvc" />
           </Form.Group>
         </div>
         <div className="text-center">
           <p className="h2">Order Total</p>
           <p className="h2">{`$${getOrderTotal()}`}</p>
           <div className="mt-4">
-          <Button className="custom-button me-2">Submit Order</Button>
-          <Link to="/cart">
-            <Button variant="outline-dark" className="ms-2">Back to Cart</Button>
-          </Link>
+            <Button className="custom-button me-2" type="submit">
+              Submit Order
+            </Button>
+            <Link to="/cart">
+              <Button variant="outline-dark" className="ms-2">
+                Back to Cart
+              </Button>
+            </Link>
           </div>
         </div>
       </Form>
