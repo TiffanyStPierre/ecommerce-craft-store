@@ -51,8 +51,16 @@ export default function Checkout() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    const orderData = {
+      customer: checkoutData,
+      cartItems: cartItems.map(item => ({
+        id: item.id,
+        quantity: item.quantity
+      }))
+    }
+
     axios
-      .post("/api/order/new", checkoutData)
+      .post("/api/order/new", orderData)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           handleShow();
