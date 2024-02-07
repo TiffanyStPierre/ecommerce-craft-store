@@ -78,9 +78,9 @@ export default function Header() {
                 <NavLink to="/cart">
                 {cartItems.length !== 0 && (
                     <Badge pill bg="danger" style={{
-                      position: "absolute",
-                      top: "38px",
-                      right: "155px",
+                      position: "relative",
+                      top: "-3px",
+                      right: "-20px",
                     }}>
                       {cartItems.length}
                     </Badge>
