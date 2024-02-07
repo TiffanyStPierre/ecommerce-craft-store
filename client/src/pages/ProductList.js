@@ -8,6 +8,34 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
   const location = useLocation();
 
+  let displayCategory;
+
+  switch(category) {
+    case "kids":
+    displayCategory = "Kids";
+    break;
+    case "knitting":
+    displayCategory = "Knitting";
+    break;
+    case "sewing":
+    displayCategory = "Sewing";
+    break;
+    case "diy-kits":
+    displayCategory = "DIY Kits";
+    break;
+    case "painting":
+    displayCategory = "Painting";
+    break;
+    case "cross-stitch":
+    displayCategory = "Cross Stitch";
+    break;
+    case "all":
+    displayCategory = "All Products";
+    break;
+    default:
+    displayCategory = "Search Results";
+  }
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -35,7 +63,7 @@ export default function ProductList() {
 
   return (
     <>
-      <h2 className="page-subtitle">Product List Page</h2>
+      <h2 className="page-subtitle">{`${displayCategory}`}</h2>
       <div className="mx-auto" style={{ width: "70%" }}>
         {products.length > 0 ? (
           <div className="d-flex flex-wrap align-items-center justify-content-between">
