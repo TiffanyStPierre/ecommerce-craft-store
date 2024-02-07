@@ -26,6 +26,8 @@ export default function Header() {
 
   const { cartItems } = useContext(CartContext);
 
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchParams((prevParams) => ({ ...prevParams, q: value }));
@@ -82,7 +84,7 @@ export default function Header() {
                       top: "-3px",
                       right: "-20px",
                     }}>
-                      {cartItems.length}
+                      {totalQuantity}
                     </Badge>
                   )}
                   <FontAwesomeIcon
