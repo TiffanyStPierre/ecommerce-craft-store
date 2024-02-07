@@ -5,8 +5,7 @@ import CartLineItem from "../components/CartLineItem";
 import { Button } from "react-bootstrap";
 
 export default function Cart() {
-  const { cartItems, clearCart, getOrderTotal, getOrderSubtotal, getOrderTax } =
-    useContext(CartContext);
+  const { cartItems, clearCart, getOrderTotal, getOrderSubtotal, getOrderTax } = useContext(CartContext);
 
   return (
     <>

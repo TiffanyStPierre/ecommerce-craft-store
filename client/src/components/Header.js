@@ -1,14 +1,18 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Alert from "react-bootstrap/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useSearchParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import {
+  Button,
+  Form,
+  Nav,
+  Navbar,
+  Offcanvas,
+  Alert,
+  Badge,
+} from "react-bootstrap";
 import axios from "axios";
 import "../styles/header.css";
 
@@ -19,6 +23,8 @@ export default function Header() {
   const [offcanvasShow, setOffcanvasShow] = useState(false);
   const [showNoResults, setShowNoResults] = useState(false);
   const navigate = useNavigate();
+
+  const { cartItems } = useContext(CartContext);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -70,6 +76,15 @@ export default function Header() {
               </NavLink>
               <div className="navbar-icons">
                 <NavLink to="/cart">
+                {cartItems.length !== 0 && (
+                    <Badge pill bg="danger" style={{
+                      position: "absolute",
+                      top: "38px",
+                      right: "155px",
+                    }}>
+                      {cartItems.length}
+                    </Badge>
+                  )}
                   <FontAwesomeIcon
                     icon={faCartShopping}
                     className="navbar-icon"
