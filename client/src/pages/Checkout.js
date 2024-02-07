@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal, Alert } from "react-bootstrap";
+import axios from "axios";
 
 export default function Checkout() {
   const { cartItems, getOrderTotal, getOrderSubtotal, getOrderTax } =
@@ -16,6 +17,11 @@ export default function Checkout() {
     postal_code: "",
   });
 
+  const [show, setShow] = useState(false);
+  const [formError, setFormError] = useState(false);
+
+  const navigate = useNavigate();
+
   const {
     first_name,
     last_name,
@@ -26,6 +32,15 @@ export default function Checkout() {
     postal_code,
   } = checkoutData;
 
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    navigate("/");
+  };
+
   const onChange = (e) => {
     setCheckoutData((prevState) => ({
       ...prevState,
@@ -33,11 +48,57 @@ export default function Checkout() {
     }));
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("/api/order/new", checkoutData)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          handleShow();
+          setFormError(false);
+        } else {
+          setFormError(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  }
+
   return (
     <>
       <h2 className="page-subtitle">Check Out</h2>
       <h3>Enter Payment & Address Information</h3>
-      <Form>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Order Submitted</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="postForm.ControlTextarea">
+              <Form.Label>
+                Your order was submitted. We will send you an email confirmation with your order details.
+              </Form.Label>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      {formError && (
+        <Alert variant="danger" className="text-center mt-4">
+          There was a problem submitting your order. Please make sure all fields
+          are filled in and try again.
+        </Alert>
+      )}
+
+      <Form onSubmit={onSubmit}>
         <div className="mt-4 container-border text-center mx-auto" style={{ width: "40%" }}>
           <h4 className="my-4">Shipping Information</h4>
           <Form.Group
@@ -170,6 +231,12 @@ export default function Checkout() {
           </div>
         </div>
       </Form>
+      {formError && (
+        <Alert variant="danger" className="text-center mt-4">
+          There was a problem submitting your order. Please make sure all fields
+          are filled in and try again.
+        </Alert>
+      )}
       <div className="page-footer-buffer"></div>
     </>
   );
