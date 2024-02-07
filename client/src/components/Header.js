@@ -138,28 +138,28 @@ export default function Header() {
                 )}
 
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <NavLink to="products/knitting" className="link mb-4 h4">
+                  <NavLink to="products/knitting" className="link mb-4 h4" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     30% Off Knitting Sale
                   </NavLink>
-                  <NavLink to="products/knitting" className="link mb-2 h5">
+                  <NavLink to="products/knitting" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     Knitting
                   </NavLink>
-                  <NavLink to="products/sewing" className="link mb-2 h5">
+                  <NavLink to="products/sewing" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     Sewing
                   </NavLink>
-                  <NavLink to="products/diy-kits" className="link mb-2 h5">
+                  <NavLink to="products/diy-kits" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     DIY Kits
                   </NavLink>
-                  <NavLink to="products/painting" className="link mb-2 h5">
+                  <NavLink to="products/painting" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     Painting
                   </NavLink>
-                  <NavLink to="products/cross-stitch" className="link mb-2 h5">
+                  <NavLink to="products/cross-stitch" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     Cross Stitch
                   </NavLink>
-                  <NavLink to="products/kids" className="link mb-2 h5">
+                  <NavLink to="products/kids" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     Kids
                   </NavLink>
-                  <NavLink to="/cart" className="link mt-4 h5">
+                  <NavLink to="/cart" className="link mt-4 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     <FontAwesomeIcon
                       icon={faCartShopping}
                       className="menu-icon me-2"
