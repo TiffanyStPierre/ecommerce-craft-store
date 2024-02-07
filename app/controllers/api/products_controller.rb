@@ -21,6 +21,13 @@ class Api::ProductsController < ApplicationController
     render json: @product, include: [:categories, :promotions]
   end
 
+  def similar_products
+    product = Product.find(params[:id])
+    category_ids = product.category_ids
+    similar_products = Product.joins(:categories).where(categories: { id: category_ids }).where.not(id: product.id).limit(3)
+    render json: similar_products
+  end
+
   def create
     product = Product.new(product_params)
   

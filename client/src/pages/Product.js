@@ -1,19 +1,26 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
+import { Button} from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 
 export default function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const { cartItems, addToCart } = useContext(CartContext);
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`/api/product/${id}`);
         setProduct(response.data);
+
+        // Fetch similar products
+      const similarProductsResponse = await axios.get(`/api/similar_products/${id}`);
+      setSimilarProducts(similarProductsResponse.data);
+      console.log(similarProductsResponse.data);
+
       } catch (error) {
         console.error(error);
       }

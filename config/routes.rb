@@ -6,8 +6,10 @@ Rails.application.routes.draw do
     get '/products', to: 'products#index'
     get '/product/:id', to: 'products#show'
     get '/search', to: 'products#search'
+    get '/similar_products/:id', to: 'products#similar_products'
     post '/product/new', to: 'products#create'
     delete '/product/:id', to: 'products#destroy'
+    
 
     resources :categories
     get '/categories', to: 'categories#index'
