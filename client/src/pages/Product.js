@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Button} from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
+import SimilarProduct from "../components/SimilarProduct";
 
 export default function Product() {
   const { id } = useParams();
@@ -43,6 +44,11 @@ export default function Product() {
       </div>
       <p className="w-50 mx-auto mb-5 h6">{product.description}</p>
       <h4>Similar products you may like</h4>
+      <div className="d-flex mt-5 mx-auto justify-content-center" style={{ width: "70%" }}>
+      {similarProducts.map((product) => (
+              <SimilarProduct key={product.id} product={product} />
+            ))}
+      </div>
       <div className="page-footer-buffer"></div>
     </>
   );
