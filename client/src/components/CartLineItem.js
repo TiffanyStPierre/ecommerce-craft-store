@@ -11,7 +11,7 @@ export default function CartLineItem(props) {
 
   return (
     <Container>
-      <Row className="mb-3 d-none d-md-flex align-items-center border rounded p-2 admin-product-item">
+      <Row className="my-2 d-none d-md-flex align-items-center p-2 admin-product-item">
         <Col xs={3} md={2}>
           <img
             src={props.product.thumbnail_url}
