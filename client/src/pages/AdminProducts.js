@@ -112,7 +112,7 @@ export default function AdminProducts() {
                 <Button variant="outline-danger" className="ms-4" onClick={() => setConfirmDelete(false)}>No</Button>
                 </Alert>
             )}
-              <Link to={`/edit-product/${selectedProduct.id}`}>
+              <Link to={`/product/edit/${selectedProduct.id}`} state={{ product: selectedProduct }}>
                 <Button className="custom-button">
                   <FontAwesomeIcon icon={faPen} />
                 </Button>

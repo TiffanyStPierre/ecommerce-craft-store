@@ -11,6 +11,7 @@ import OrderList from "./pages/OrderList";
 import Promotions from "./pages/Promotions";
 import Order from "./pages/Order";
 import CreateProduct from "./pages/CreateProduct";
+import EditProduct from "./pages/EditProduct";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/new" element={<CreateProduct />} />
+        <Route path="/product/edit/:id" element={<EditProduct />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/searchresults" element={<ProductList />} />
