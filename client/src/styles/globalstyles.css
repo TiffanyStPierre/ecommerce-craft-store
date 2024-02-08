@@ -65,6 +65,12 @@ h4 {
   border: none;
 }
 
+.custom-button:hover {
+  background-color: #7993B4;
+  color: var(--clr-dark);
+  font-weight: bold;
+}
+
 @media (max-width: 800px) {
   .admin-header-button {
     font-size: 0.75rem;
