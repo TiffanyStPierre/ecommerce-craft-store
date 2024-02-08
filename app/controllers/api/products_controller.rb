@@ -44,6 +44,21 @@ class Api::ProductsController < ApplicationController
     end
   end
 
+  def update
+    category_name = params[:category]
+    category = Category.find_by(name: category_name)
+
+  if @product.update(product_params)
+    # Clear existing categories and add the new one
+    @product.categories.clear
+    @product.categories << category
+
+    render json: @product, include: [:categories, :promotions], status: :ok
+  else
+    render json: { error: @product.errors.full_messages.join(', ') }, status: :unprocessable_entity
+  end
+  end
+
   def destroy
     @product = Product.find(params[:id])
     @product.destroy

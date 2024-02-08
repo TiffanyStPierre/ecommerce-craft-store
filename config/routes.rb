@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/similar_products/:id', to: 'products#similar_products'
     post '/product/new', to: 'products#create'
     delete '/product/:id', to: 'products#destroy'
+    put '/product/edit/:id', to: 'products#update'
     
 
     resources :categories

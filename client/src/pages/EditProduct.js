@@ -90,7 +90,7 @@ export default function EditProduct() {
     e.preventDefault();
 
     axios
-      .put("/api/product/edit/:id", productData)
+      .put(`/api/product/edit/${id}`, productData)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           handleShow();
