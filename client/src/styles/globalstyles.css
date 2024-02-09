@@ -71,22 +71,6 @@ h4 {
   font-weight: bold;
 }
 
-@media (max-width: 800px) {
-  .admin-header-button {
-    font-size: 0.75rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.25rem;
-    padding: 1rem;
-    text-align: center;
-  }
-}
-
 .link {
   text-decoration: none;
   color: var(--clr-dark);
@@ -146,5 +130,21 @@ h4 {
 @keyframes l30 {
   100% {
     transform: rotate(-1turn);
+  }
+}
+
+@media (max-width: 800px) {
+  .admin-header-button {
+    font-size: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    padding: 1rem;
+    text-align: center;
   }
 }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Button} from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import SimilarProduct from "../components/SimilarProduct";
+import "../styles/product.css";
 
 export default function Product() {
   const { id } = useParams();
@@ -34,17 +35,17 @@ export default function Product() {
   return (
     <>
       <h2 className="page-subtitle">{product.name}</h2>
-      <div className="d-flex mx-auto my-5 align-items-center justify-content-around" style={{ width: "70%" }}>
+      <div className="d-flex mx-auto my-5 align-items-center justify-content-around product-details">
         <img src={product.image_url} alt={product.name} className="rounded" style={{ width: "45%" }}/>
-        <div className="d-flex flex-column align-items-start" style={{ width: "45%" }}>
-          <h3>{product.name}</h3>
-          <h3 className="my-1">${product.price}</h3>
-          <Button className="custom-button my-4" onClick={() => addToCart(product)}>Add to Cart</Button>
+        <div className="d-flex flex-column align-items-center" style={{ width: "45%" }}>
+          <h3 className="product-details-title">{product.name}</h3>
+          <h3 className="my-1 product-details-title">${product.price}</h3>
+          <Button className="custom-button mt-4" onClick={() => addToCart(product)}>Add to Cart</Button>
         </div>
       </div>
-      <p className="w-50 mx-auto mb-5 h6">{product.description}</p>
-      <h4>Similar products you may like</h4>
-      <div className="d-flex mt-5 mx-auto justify-content-center" style={{ width: "70%" }}>
+      <p className="mx-auto mb-5 product-description">{product.description}</p>
+      <h4 className="similar-products-heading">Similar products you may like</h4>
+      <div className="d-flex mt-5 mx-auto justify-content-center similar-products-container" style={{ width: "90%" }}>
       {similarProducts.map((product) => (
               <SimilarProduct key={product.id} product={product} />
             ))}
