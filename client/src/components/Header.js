@@ -79,11 +79,7 @@ export default function Header() {
               <div className="navbar-icons">
                 <NavLink to="/cart">
                 {cartItems.length !== 0 && (
-                    <Badge pill bg="danger" className="navbar-badge" style={{
-                      position: "relative",
-                      top: "-3px",
-                      right: "-20px",
-                    }}>
+                    <Badge pill bg="danger" id="navbar-badge" className="navbar-badge">
                       {totalQuantity}
                     </Badge>
                   )}

@@ -16,12 +16,18 @@
   margin-right: 2rem;
 }
 
+.navbar-badge {
+  position: relative;
+  top: -3px;
+  right: -20px;
+}
+
 /* Hide the cart icon in header on screens smaller than 1000px */
 @media (max-width: 1000px) {
   .navbar-icon,
-  .navbar-badge {
+  #navbar-badge {
     display: none;
-    margin-right: none;
+    margin-right: 0;
   }
 
   .header {
