@@ -1,0 +1,9 @@
+.cart-container {
+  width: 70%;
+}
+
+@media (max-width: 1060px) {
+  .cart-container {
+    width: 90%;
+  }
+}

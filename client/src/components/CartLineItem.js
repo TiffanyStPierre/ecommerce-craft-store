@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { CartContext } from "../context/CartContext";
+import "../styles/cart.css";
 
 export default function CartLineItem(props) {
   const { addToCart, removeFromCart } = useContext(CartContext);

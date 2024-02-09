@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import CartLineItem from "../components/CartLineItem";
 import { Button } from "react-bootstrap";
+import "../styles/cart.css";
 
 export default function Cart() {
   const { cartItems, clearCart, getOrderTotal, getOrderSubtotal, getOrderTax } = useContext(CartContext);
@@ -17,8 +18,7 @@ export default function Cart() {
       )}
 
       <div
-        className="mt-3 container-border text-center mx-auto"
-        style={{ width: "60%" }}
+        className="mt-3 container-border text-center mx-auto cart-container"
       >
         <div>
           {cartItems.map((item) => (
