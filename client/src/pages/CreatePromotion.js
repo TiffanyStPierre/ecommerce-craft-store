@@ -48,7 +48,28 @@ export default function CreatePromotion() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-  }
+
+    axios
+      .post("/api/promotion/new", promotionData)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          handleShow();
+          setFormError(false);
+          setPromotionData({
+            name: "",
+            percent_discount: 0,
+            start_date: null,
+            end_date: null,
+            products: [],
+          });
+        } else {
+          setFormError(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -151,19 +172,19 @@ export default function CreatePromotion() {
         >
           <Form.Label className="h5 mt-3">Included Products</Form.Label>
           <div className="form-checkboxes mt-3">
-          {allProducts &&
-            allProducts.map((prod) => (
-              <Form.Check
-                key={prod.id}
-                type="checkbox"
-                id={prod.id}
-                label={prod.name}
-                className="form-checkbox"
-                checked={products.includes(prod.id)}
-                onChange={() => handleCheckboxChange(prod.id)}
-              />
-            ))}
-            </div>
+            {allProducts &&
+              allProducts.map((prod) => (
+                <Form.Check
+                  key={prod.id}
+                  type="checkbox"
+                  id={prod.id}
+                  label={prod.name}
+                  className="form-checkbox"
+                  checked={products.includes(prod.id)}
+                  onChange={() => handleCheckboxChange(prod.id)}
+                />
+              ))}
+          </div>
         </Form.Group>
 
         <div className="text-center">
@@ -178,8 +199,8 @@ export default function CreatePromotion() {
       </Form>
       {formError && (
         <Alert variant="danger" className="text-center mt-4">
-          There was a problem creating your promotion. Please make sure all fields
-          are filled in and try again.
+          There was a problem creating your promotion. Please make sure all
+          fields are filled in and try again.
         </Alert>
       )}
       <div className="page-footer-buffer"></div>
