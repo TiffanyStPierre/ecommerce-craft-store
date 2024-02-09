@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     get '/orders', to: 'orders#index'
     get '/order/:id', to: 'orders#show'
     post '/order/new', to: 'orders#create'
+
+    resources :promotions
+    get '/promotions', to: 'promotions#index'
+    
   end
 
   # Exclude paths starting with /api from the wildcard route
