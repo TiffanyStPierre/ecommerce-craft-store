@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 export default function ProductListItem(props) {
   return (
   <Link to={`/product/${props.product.id}`} className="link">
-    <Card style={{ width: '350px', height: '400px' }} className="m-4">
+    <Card style={{ width: '300px', height: '365px' }} className="my-4 mx-3">
       <Card.Img variant="top" src={props.product.image_url} style={{height: '225px', width: '350px'}}/>
       <Card.Body className="d-flex flex-column align-items-center bg-light">
-        <Card.Title className="text-center">{props.product.name}</Card.Title>
-        <Card.Text className="mb-4 mt-2 fs-5">
+        <Card.Title className="text-center fs-6">{props.product.name}</Card.Title>
+        <Card.Text className="mb-3 mt-1 fs-6">
           ${props.product.price}
         </Card.Text>
         <Button className="custom-button mb-2">Details</Button>

@@ -75,9 +75,9 @@ export default function ProductList() {
       {isLoading && (
         <LoadingIndicator />
       )}
-      <div className="mx-auto" style={{ width: "70%" }}>
+      <div className="mx-auto" style={{ width: "85%" }}>
         {products.length > 0 ? (
-          <div className="d-flex flex-wrap align-items-center justify-content-between">
+          <div className="d-flex flex-wrap align-items-center justify-content-around">
             {products.map((product) => (
               <ProductListItem key={product.id} product={product} />
             ))}
