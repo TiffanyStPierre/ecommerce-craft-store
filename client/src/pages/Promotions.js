@@ -9,7 +9,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Promotions() {
 
-  const [promotions, setPromotions] =([]);
+  const [promotions, setPromotions] =useState([]);
   const [selectedPromotion, setSelectedPromotion] = useState(null);
 
   useEffect(() => {
@@ -53,9 +53,12 @@ export default function Promotions() {
             <strong>End Date</strong>
           </Col>
         </Row>
+        {promotions.map((promotion) => (
           <PromotionListItem
-            
+            key={promotion.id}
+            promotion={promotion}
           />
+        ))}
       </Container>
     <div className="page-footer-buffer"></div>
     </>
