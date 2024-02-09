@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :promotions
     get '/promotions', to: 'promotions#index'
     post 'promotion/new', to: 'promotions#create'
+    delete '/promotion/:id', to: 'promotions#destroy'
     
   end
 

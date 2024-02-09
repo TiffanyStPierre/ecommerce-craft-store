@@ -20,6 +20,11 @@ class Api::PromotionsController < ApplicationController
     end
   end
 
+  def destroy
+    @promotion = Promotion.find(params[:id])
+    @promotion.destroy
+  end
+
   private
 
   def set_promotion

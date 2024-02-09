@@ -101,9 +101,9 @@ export default function Promotions() {
             <>
             {confirmDelete && (
               <Alert variant="danger" className="me-5">
-                Are you sure you want to delete this promotion?
-                <Button variant="outline-danger" className="ms-4" onClick={deletePromotion}>Yes</Button>
-                <Button variant="outline-danger" className="ms-4" onClick={() => setConfirmDelete(false)}>No</Button>
+                Are you sure you want to delete this promotion?<br/>
+                <Button variant="outline-danger" className="mt-3" onClick={deletePromotion}>Yes</Button>
+                <Button variant="outline-danger" className="ms-3 mt-3" onClick={() => setConfirmDelete(false)}>No</Button>
                 </Alert>
             )}
               <Link to={`/promotion/edit/${selectedPromotion.id}`} state={{ promotion: selectedPromotion }}>
