@@ -9,6 +9,24 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Promotions() {
 
+  const [promotions, setPromotions] =([]);
+  const [selectedPromotion, setSelectedPromotion] = useState(null);
+
+  useEffect(() => {
+    const fetchPromotions = async () => {
+      try {
+        const response = await axios.get("/api/promotions");
+        setPromotions(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    // Call the fetchProducts function on page load
+    fetchPromotions();
+  }, []);
+
   return (
     <>
     <h2 className="page-subtitle">Admin Dashboard - Promotions</h2>
