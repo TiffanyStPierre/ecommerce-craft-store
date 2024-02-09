@@ -13,6 +13,7 @@ import Order from "./pages/Order";
 import CreateProduct from "./pages/CreateProduct";
 import CreatePromotion from "./pages/CreatePromotion";
 import EditProduct from "./pages/EditProduct";
+import EditPromotion from "./pages/EditPromotion";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/order/:id" element={<Order />} />
         <Route path="/admin/promotions" element={<Promotions />} />
         <Route path="/promotion/new" element={<CreatePromotion />} />
+        <Route path="/promotion/edit/:id" element={<EditPromotion />} />
       </Routes>
       <Footer />
     </>
