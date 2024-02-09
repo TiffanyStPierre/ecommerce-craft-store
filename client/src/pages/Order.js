@@ -43,11 +43,15 @@ export default function Order() {
               {order.customer.city}, {order.customer.province}
               <br />
               {order.customer.postal_code}
+              <br />
+              {order.customer.email}
             </p>
           </Col>
           <Col className="text-center">
             <h4 className="mt-4 mb-1">Order Date</h4>
             <p>{order.order.order_date}</p>
+            <h4 className="mt-4 mb-1">Date Shipped</h4>
+            <p>{order.order.shipped_date}</p>
           </Col>
           <Col className="text-center">
             <h4 className="mt-4 mb-1">Invoice #</h4>
