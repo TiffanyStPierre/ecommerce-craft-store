@@ -21,19 +21,19 @@ export default function Home() {
         </Link>
       </section>
       <section>
-        <h3>Inspired Collections</h3>
+        <h3 className="home-subtitle">Inspired Collections</h3>
         <div className="home-collections">
           <Link to="/products/sewing" className="home-collection link">
             <img src="/assets/images/home-sewing-thumbnail.webp" alt="Variety of buttons and spools of thread." />
-            <h4>Sewing Supplies</h4>
+            <h4 className="home-category-label">Sewing Supplies</h4>
           </Link>
           <Link to="/products/diy-kits" className="home-collection link">
             <img src="/assets/images/home-diy-thumbnail.webp" alt="Supplies for a DIY cross stitch kit." />
-            <h4>Curated DIY Kits</h4>
+            <h4 className="home-category-label">Curated DIY Kits</h4>
           </Link>
           <Link to="/products/painting" className="home-collection link">
             <img src="/assets/images/home-painting-thumbnail.webp" alt="Open buckets of various paint colors viewed from above." />
-            <h4>Painting Supplies</h4>
+            <h4 className="home-category-label">Painting Supplies</h4>
           </Link>
         </div>
       </section>
@@ -49,15 +49,15 @@ export default function Home() {
       <section className="home-icons">
         <div className="home-icon-container">
           <FontAwesomeIcon icon={faTruck} size="3x" className="home-icon" />
-          <h4>Free Shipping</h4>
+          <h4 className="home-category-label">Free Shipping</h4>
         </div>
         <div className="home-icon-container">
           <FontAwesomeIcon icon={faLeaf} size="3x" className="home-icon" />
-          <h4>Eco Friendly Packaging</h4>
+          <h4 className="home-category-label">Eco Friendly Packaging</h4>
         </div>
         <div className="home-icon-container">
           <FontAwesomeIcon icon={faGift} size="3x" className="home-icon" />
-          <h4>Gift Cards Available</h4>
+          <h4 className="home-category-label">Gift Cards Available</h4>
         </div>
       </section>
       <Link to="/products/kids" className="link">

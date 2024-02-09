@@ -11,7 +11,7 @@ export default function Footer() {
       </div>
       <div className="footer-subsection">
         <FontAwesomeIcon icon={faPalette} className="footer-icon" size="2x" />
-        <p>Copyright 2023 - Craft Market Ltd</p>
+        <p className="footer-sm-text">Copyright 2023<br/>Craft Market Ltd</p>
       </div>
       <div className="footer-subsection">
         <p>About Us</p>

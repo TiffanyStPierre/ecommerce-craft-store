@@ -18,7 +18,8 @@
 
 /* Hide the cart icon in header on screens smaller than 1000px */
 @media (max-width: 1000px) {
-  .navbar-icon {
+  .navbar-icon,
+  .navbar-badge {
     display: none;
     margin-right: none;
   }

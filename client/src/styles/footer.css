@@ -1,7 +1,7 @@
 .footer {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: nowrap;
   padding: 3rem 0 5rem 0;
 }
@@ -9,6 +9,11 @@
 .footer-subsection {
   display: flex;
   flex-direction: column;
+}
+
+.footer-sm-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .footer-subsection p {
@@ -19,4 +24,15 @@
 .footer-icon {
   color: var(--clr-accent);
   margin: 1rem 0 0 0;
+}
+
+@media (max-width: 600px) {
+  .footer-icon,
+  .footer-sm-text {
+    display: none;
+  }
+
+  .footer {
+    justify-content: space-evenly;
+  }
 }
