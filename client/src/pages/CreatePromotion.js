@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
+import "../styles/promotions.css";
 
 export default function CreatePromotion() {
   const [allProducts, setAllProducts] = useState([]);
@@ -148,7 +149,8 @@ export default function CreatePromotion() {
           className="mb-4 form-input-group mx-auto"
           controlId="products"
         >
-          <Form.Label>Included Products</Form.Label>
+          <Form.Label className="h5 mt-3">Included Products</Form.Label>
+          <div className="form-checkboxes mt-3">
           {allProducts &&
             allProducts.map((prod) => (
               <Form.Check
@@ -156,10 +158,12 @@ export default function CreatePromotion() {
                 type="checkbox"
                 id={prod.id}
                 label={prod.name}
+                className="form-checkbox"
                 checked={products.includes(prod.id)}
                 onChange={() => handleCheckboxChange(prod.id)}
               />
             ))}
+            </div>
         </Form.Group>
 
         <div className="text-center">
