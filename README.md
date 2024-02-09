@@ -7,8 +7,8 @@ This ecommerce craft store was built with React, React Router, Ruby on Rails, Po
 * Will be responsive & mobile friendly when completed
 * Search functionality that allows the shopper to search for products
 * Product categories for easy browsing
-* Shopping cart with easy add and remove functionality - coming soon
-* Similar product recommendations on each product details page - coming soon
+* Shopping cart with easy add and remove functionality
+* Similar product recommendations on each product details page
 * Store administrator dashboard for admin use only
 * Simple user interface for admin to view, add and delete products
 * Simple user interface for admin to view all customer orders or single order details
