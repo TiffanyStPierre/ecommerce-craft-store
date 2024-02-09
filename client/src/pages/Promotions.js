@@ -11,6 +11,13 @@ export default function Promotions() {
 
   const [promotions, setPromotions] =useState([]);
   const [selectedPromotion, setSelectedPromotion] = useState(null);
+  const [fullscreen, setFullscreen] = useState(true);
+  const [show, setShow] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const productNames =
+    selectedPromotion ? selectedPromotion.products.map((product) => product.name).join(", ")
+      : "No Products";
 
   useEffect(() => {
     const fetchPromotions = async () => {
@@ -27,10 +34,90 @@ export default function Promotions() {
     fetchPromotions();
   }, []);
 
+  const showPromotionModal = (breakpoint, promotion) => {
+    setFullscreen(breakpoint);
+    setSelectedPromotion(promotion);
+    setShow(true);
+  };
+
+  const deletePromotionConfirm = () => {
+    setConfirmDelete(true);
+  }
+
+  const deletePromotion = async () => {
+    try {
+      const promotionId = selectedPromotion.id;
+
+      await axios.delete(`/api/promotion/${promotionId}`);
+
+      setPromotions((prevPromotions) => 
+      prevPromotions.filter((promotion) => promotion.id !== promotionId)
+      );
+
+      setShow(false);
+      setConfirmDelete(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
     <h2 className="page-subtitle">Admin Dashboard - Promotions</h2>
     <h3>Promotions</h3>
+    <Modal
+        size="md"
+        show={show}
+        fullscreen={fullscreen}
+        onHide={() => setShow(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {selectedPromotion ? selectedPromotion.name : "Promotion Details"}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedPromotion && (
+            <div className="m-4">
+              <div className="d-flex">
+                <div>
+                  <p className="mb-2 h5">Promotion #: {selectedPromotion.id}</p>
+                  <p className="mb-2 h5">Discount: {Math.round(selectedPromotion.percent_discount)}%</p>
+                  <p className="mb-2 h5">
+                    Start Date: {selectedPromotion.start_date ? selectedPromotion.start_date : "None"}
+                  </p>
+                  <p className="mb-2 h5">End Date: {selectedPromotion.end_date ? selectedPromotion.end_date : "None"}</p>
+                  <p className="mb-2 h5">
+                    Included products: 
+                  </p>
+                  <p>{productNames ? productNames : "No products included"}</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          {selectedPromotion && (
+            <>
+            {confirmDelete && (
+              <Alert variant="danger" className="me-5">
+                Are you sure you want to delete this promotion?
+                <Button variant="outline-danger" className="ms-4" onClick={deletePromotion}>Yes</Button>
+                <Button variant="outline-danger" className="ms-4" onClick={() => setConfirmDelete(false)}>No</Button>
+                </Alert>
+            )}
+              <Link to={`/promotion/edit/${selectedPromotion.id}`} state={{ promotion: selectedPromotion }}>
+                <Button className="custom-button">
+                  <FontAwesomeIcon icon={faPen} />
+                </Button>
+              </Link>
+              <Button variant="danger" className="ms-3" onClick={deletePromotionConfirm}>
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+            </>
+          )}
+        </Modal.Footer>
+      </Modal>
     <div className="text-center mt-5">
         <Link to="/promotion/new" className="link">
           <Button className="custom-button" size="lg">
@@ -57,6 +144,9 @@ export default function Promotions() {
           <PromotionListItem
             key={promotion.id}
             promotion={promotion}
+            onClick={(bp, promotion) =>
+              showPromotionModal(bp, promotion)
+            }
           />
         ))}
       </Container>

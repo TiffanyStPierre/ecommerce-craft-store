@@ -10,6 +10,7 @@ export default function PromotionListItem(props) {
 
       <Row
         className="mb-2 d-md-none mx-auto admin-product-item"
+        onClick={() => props.onClick("sm-down", props.promotion)}
       >
         <Col xs={12} sm={12} md={12} lg={12} className="mx-auto">
           <Card className="admin-product-card mx-auto">
@@ -23,12 +24,6 @@ export default function PromotionListItem(props) {
               <Card.Subtitle className="text-center my-1">
                 Start Date: {props.promotion.start_date ? props.promotion.start_date : "None"}<br/>End Date: {props.promotion.end_date ? props.promotion.end_date : "None"}
               </Card.Subtitle>
-              <Card.Subtitle className="text-center my-3">
-                Products
-              </Card.Subtitle>
-              <Card.Text className="text-center">
-                List of Products
-              </Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -36,6 +31,7 @@ export default function PromotionListItem(props) {
       {/* Displayed on larger screens */}
       <Row
         className="mb-3 d-none d-md-flex align-items-center border rounded p-2 admin-product-item"
+        onClick={() => props.onClick("sm-down", props.promotion)}
       >
         <Col xs={3} md={3} className="text-center">
           {props.promotion.name}
