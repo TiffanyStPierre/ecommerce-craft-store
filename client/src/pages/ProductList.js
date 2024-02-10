@@ -4,7 +4,7 @@ import axios from "axios";
 import ProductListItem from "../components/ProductListItem";
 import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
-import { Form, Pagination } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 export default function ProductList() {
   const { category } = useParams();

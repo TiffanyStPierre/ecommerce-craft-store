@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminProductItem from "../components/AdminProductItem";
-import { Container, Row, Col, Button, Modal, Alert, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  Alert,
+  Form,
+} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +24,16 @@ export default function AdminProducts() {
   const [categories, setCategories] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8); // Number of items per page
+
+  // Calculate index of the first and last item to display on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentDisplayProducts = displayProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,6 +41,7 @@ export default function AdminProducts() {
         const response = await axios.get("/api/products");
         setProducts(response.data);
         setDisplayProducts(response.data);
+        setCurrentPage(1);
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +73,7 @@ export default function AdminProducts() {
 
   const deleteProductConfirm = () => {
     setConfirmDelete(true);
-  }
+  };
 
   const deleteProduct = async () => {
     try {
@@ -63,8 +81,8 @@ export default function AdminProducts() {
 
       await axios.delete(`/api/product/${productId}`);
 
-      setProducts((prevProducts) => 
-      prevProducts.filter((product) => product.id !== productId)
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== productId)
       );
 
       setShow(false);
@@ -87,10 +105,13 @@ export default function AdminProducts() {
       );
       setDisplayProducts(filteredProducts);
     }
-  
+
     setSelectedCategory(selectedCategory);
-    
+    setCurrentPage(1);
   };
+
+  // Function to handle pagination
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -142,19 +163,38 @@ export default function AdminProducts() {
         <Modal.Footer>
           {selectedProduct && (
             <>
-            {confirmDelete && (
-              <Alert variant="danger" className="me-5">
-                Are you sure you want to delete this product?
-                <Button variant="outline-danger" className="ms-4" onClick={deleteProduct}>Yes</Button>
-                <Button variant="outline-danger" className="ms-4" onClick={() => setConfirmDelete(false)}>No</Button>
+              {confirmDelete && (
+                <Alert variant="danger" className="me-5">
+                  Are you sure you want to delete this product?
+                  <Button
+                    variant="outline-danger"
+                    className="ms-4"
+                    onClick={deleteProduct}
+                  >
+                    Yes
+                  </Button>
+                  <Button
+                    variant="outline-danger"
+                    className="ms-4"
+                    onClick={() => setConfirmDelete(false)}
+                  >
+                    No
+                  </Button>
                 </Alert>
-            )}
-              <Link to={`/product/edit/${selectedProduct.id}`} state={{ product: selectedProduct }}>
+              )}
+              <Link
+                to={`/product/edit/${selectedProduct.id}`}
+                state={{ product: selectedProduct }}
+              >
                 <Button className="custom-button">
                   <FontAwesomeIcon icon={faPen} />
                 </Button>
               </Link>
-              <Button variant="danger" className="ms-3" onClick={deleteProductConfirm}>
+              <Button
+                variant="danger"
+                className="ms-3"
+                onClick={deleteProductConfirm}
+              >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
             </>
@@ -162,7 +202,7 @@ export default function AdminProducts() {
         </Modal.Footer>
       </Modal>
       <Form>
-      <Form.Group
+        <Form.Group
           className="mt-5 form-input-group mx-auto text-center"
           controlId="category"
         >
@@ -199,7 +239,7 @@ export default function AdminProducts() {
             <strong>Promotions</strong>
           </Col>
         </Row>
-        {displayProducts.map((product) => (
+        {currentDisplayProducts.map((product) => (
           <AdminProductItem
             key={product.id}
             product={product}
@@ -209,6 +249,22 @@ export default function AdminProducts() {
           />
         ))}
       </Container>
+      <nav className="d-flex justify-content-center mt-5">
+      <ul className="pagination">
+        {Array.from({ length: Math.ceil(displayProducts.length / itemsPerPage) }).map(
+          (_, index) => (
+            <li key={index} className="page-item">
+              <button
+                className="page-link custom-button"
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
       <div className="page-footer-buffer"></div>
     </>
   );
