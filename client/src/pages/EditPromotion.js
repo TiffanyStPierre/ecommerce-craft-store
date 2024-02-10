@@ -5,23 +5,30 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
+import { useLoading } from "../context/LoadingContext";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 export default function EditPromotion() {
   const location = useLocation();
   const { id } = useParams();
 
+  const { isLoading, setIsLoading } = useLoading();
+
   const selectedPromotion = location.state.promotion;
 
   const [allProducts, setAllProducts] = useState([]);
-  const [checkedProducts, setCheckedProducts] = useState([]);
 
   const [promotionData, setPromotionData] = useState({
     name: "",
     percent_discount: 0,
     start_date: null,
     end_date: null,
-    products: selectedPromotion ? selectedPromotion.products : [],
+    products: selectedPromotion
+      ? selectedPromotion.products.map((prod) => prod.id)
+      : [],
   });
+
+  const [checkboxesChecked, setCheckboxesChecked] = useState({});
 
   const [show, setShow] = useState(false);
   const [formError, setFormError] = useState(false);
@@ -31,43 +38,39 @@ export default function EditPromotion() {
   const { name, percent_discount, start_date, end_date, products } =
     promotionData;
 
-  useEffect(() => {
-    if (selectedPromotion) {
-      setPromotionData({
-        name: selectedPromotion.name,
-        percent_discount: selectedPromotion.percent_discount,
-        start_date: selectedPromotion.start_date,
-        end_date: selectedPromotion.end_date,
-        products: selectedPromotion.products,
-      });
-
-      setCheckedProducts(selectedPromotion.products);
-    }
-  }, [selectedPromotion]);
-
-  useEffect(() => {
-    if (selectedPromotion) {
-      setPromotionData({
-        name: selectedPromotion.name,
-        percent_discount: selectedPromotion.percent_discount,
-        start_date: selectedPromotion.start_date,
-        end_date: selectedPromotion.end_date,
-        products: selectedPromotion.products,
-      });
-    }
-  }, [selectedPromotion]);
+    useEffect(() => {
+      if (selectedPromotion) {
+        setPromotionData({
+          name: selectedPromotion.name,
+          percent_discount: selectedPromotion.percent_discount,
+          start_date: selectedPromotion.start_date,
+          end_date: selectedPromotion.end_date,
+          products: selectedPromotion.products.map((prod) => prod.id),
+        });
+  
+        // Initialize checkboxesChecked based on selectedPromotion.products
+        const initialCheckboxesChecked = {};
+        selectedPromotion.products.forEach(prod => {
+          initialCheckboxesChecked[prod.id] = true;
+        });
+        setCheckboxesChecked(initialCheckboxesChecked);
+      }
+    }, [selectedPromotion]);
 
   useEffect(() => {
+
+    setIsLoading(true);
+
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/products");
         setAllProducts(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
 
-    // Call the fetchProducts function on page load
     fetchProducts();
   }, []);
 
@@ -76,12 +79,20 @@ export default function EditPromotion() {
   };
 
   const handleCheckboxChange = (productId) => {
-    // Check if the product is already in the array
-    const updatedProducts = products.includes(productId)
-      ? products.filter((id) => id !== productId) // If already selected, remove it
-      : [...products, productId]; // If not selected, add it
+    setCheckboxesChecked({
+      ...checkboxesChecked,
+      [productId]: !checkboxesChecked[productId],
+    });
 
-    setPromotionData({ ...promotionData, products: updatedProducts });
+    // Update promotionData.products based on checkboxesChecked
+    const updatedProducts = Object.keys(checkboxesChecked)
+      .filter((id) => checkboxesChecked[id])
+      .map((id) => parseInt(id));
+
+    setPromotionData((prevData) => ({
+      ...prevData,
+      products: updatedProducts,
+    }));
   };
 
   const onSubmit = (e) => {};
@@ -89,6 +100,7 @@ export default function EditPromotion() {
   return (
     <>
       <h2 className="page-subtitle">Admin - Edit Promotion</h2>
+      {isLoading && <LoadingIndicator />}
       <h3 className="mb-5">Edit Promotion</h3>
       {formError && (
         <Alert variant="danger" className="text-center">
@@ -152,18 +164,17 @@ export default function EditPromotion() {
         >
           <Form.Label className="h5 mt-3">Included Products</Form.Label>
           <div className="form-checkboxes mt-3">
-            {allProducts &&
-              allProducts.map((prod) => (
-                <Form.Check
-                  key={prod.id}
-                  type="checkbox"
-                  id={prod.id}
-                  label={prod.name}
-                  className="form-checkbox"
-                  checked={selectedPromotion.products.includes(prod.id)}
-                  onChange={() => handleCheckboxChange(prod.id)}
-                />
-              ))}
+            {allProducts.map((prod) => (
+              <Form.Check
+                key={prod.id}
+                type="checkbox"
+                id={prod.id}
+                label={prod.name}
+                className="form-checkbox"
+                checked={checkboxesChecked[prod.id]}
+                onChange={() => handleCheckboxChange(prod.id)}
+              />
+            ))}
           </div>
         </Form.Group>
 
@@ -173,7 +184,7 @@ export default function EditPromotion() {
             type="submit"
             className="custom-button mt-5"
           >
-            Create Promotion
+            Save Changes
           </Button>
         </div>
       </Form>
