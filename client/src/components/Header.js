@@ -139,6 +139,9 @@ export default function Header() {
                   <NavLink to="products/knitting" className="link mb-4 h4" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     30% Off Knitting Sale
                   </NavLink>
+                  <NavLink to="products/all" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
+                    All Products
+                  </NavLink>
                   <NavLink to="products/knitting" className="link mb-2 h5" onClick={() => setOffcanvasShow(!offcanvasShow)}>
                     Knitting
                   </NavLink>
