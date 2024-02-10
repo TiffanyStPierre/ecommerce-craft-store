@@ -4,7 +4,7 @@ import axios from "axios";
 import ProductListItem from "../components/ProductListItem";
 import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
-import { Form } from "react-bootstrap";
+import { Form, Pagination } from "react-bootstrap";
 
 export default function ProductList() {
   const { category } = useParams();
@@ -13,6 +13,8 @@ export default function ProductList() {
   const [categories, setCategories] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(12); // Number of items per page
 
   const { isLoading, setIsLoading } = useLoading();
 
@@ -44,6 +46,14 @@ export default function ProductList() {
       displayCategory = "Search Results";
   }
 
+  // Calculate index of the first and last item to display on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentDisplayProducts = displayProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -64,6 +74,7 @@ export default function ProductList() {
           const response = await axios.get(apiEndpoint);
           setProducts(response.data);
           setDisplayProducts(response.data);
+          setCurrentPage(1);
           setIsLoading(false);
         }
       } catch (error) {
@@ -102,10 +113,13 @@ export default function ProductList() {
       );
       setDisplayProducts(filteredProducts);
     }
-  
+
     setSelectedCategory(selectedCategory);
-    
+    setCurrentPage(1);
   };
+
+  // Function to handle pagination
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -137,7 +151,7 @@ export default function ProductList() {
       <div className="mx-auto" style={{ width: "85%" }}>
         {products.length > 0 ? (
           <div className="d-flex flex-wrap align-items-center justify-content-around">
-            {displayProducts.map((product) => (
+            {currentDisplayProducts.map((product) => (
               <ProductListItem key={product.id} product={product} />
             ))}
           </div>
@@ -145,6 +159,22 @@ export default function ProductList() {
           <p>No search results or products available for this category.</p>
         )}
       </div>
+      <nav className="d-flex justify-content-center mt-5">
+      <ul className="pagination">
+        {Array.from({ length: Math.ceil(displayProducts.length / itemsPerPage) }).map(
+          (_, index) => (
+            <li key={index} className="page-item">
+              <button
+                className="page-link custom-button"
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
       <div className="page-footer-buffer"></div>
     </>
   );
