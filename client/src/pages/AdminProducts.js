@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminProductItem from "../components/AdminProductItem";
-import { Container, Row, Col, Button, Modal, Alert } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Alert, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -13,12 +13,17 @@ export default function AdminProducts() {
   const [show, setShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/products");
         setProducts(response.data);
+        setDisplayProducts(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -26,6 +31,20 @@ export default function AdminProducts() {
 
     // Call the fetchProducts function on page load
     fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/api/categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    // Call the fetchCategories function on page load
+    fetchCategories();
   }, []);
 
   const showProductModal = (breakpoint, product, promotionNames) => {
@@ -55,11 +74,29 @@ export default function AdminProducts() {
     }
   };
 
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+
+    if (selectedCategory === "") {
+      // If no category is selected, display all products
+      setDisplayProducts(products);
+    } else {
+      // Filter products based on the selected category
+      const filteredProducts = products.filter((product) =>
+        product.categories.some((cat) => cat.name === selectedCategory)
+      );
+      setDisplayProducts(filteredProducts);
+    }
+  
+    setSelectedCategory(selectedCategory);
+    
+  };
+
   return (
     <>
       <h2 className="page-subtitle">Admin Dashboard - Products</h2>
       <h3>Products</h3>
-      <div className="text-center mt-5">
+      <div className="text-center mt-4">
         <Link to="/product/new" className="link">
           <Button className="custom-button" size="lg">
             Add Product
@@ -124,6 +161,23 @@ export default function AdminProducts() {
           )}
         </Modal.Footer>
       </Modal>
+      <Form>
+      <Form.Group
+          className="mt-5 form-input-group mx-auto text-center"
+          controlId="category"
+        >
+          <Form.Label>Filter by Category</Form.Label>
+          <Form.Select
+            aria-label="Category select"
+            name="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+            {categories &&
+              categories.map((cat) => <option key={cat.id}>{cat.name}</option>)}
+          </Form.Select>
+        </Form.Group>
+      </Form>
       <Container className="mt-5 px-5 container-border">
         <Row className="d-none d-md-flex align-items-center pt-4 pb-2">
           <Col style={{ width: "100px" }} className="text-center h5">
@@ -145,7 +199,7 @@ export default function AdminProducts() {
             <strong>Promotions</strong>
           </Col>
         </Row>
-        {products.map((product) => (
+        {displayProducts.map((product) => (
           <AdminProductItem
             key={product.id}
             product={product}
