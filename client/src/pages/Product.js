@@ -40,7 +40,12 @@ export default function Product() {
         <div className="d-flex flex-column align-items-center" style={{ width: "45%" }}>
           <h3 className="product-details-title">{product.name}</h3>
           <h3 className="my-1 product-details-title">${product.price}</h3>
+          {product.inventory !== 0 && (
           <Button className="custom-button mt-4" onClick={() => addToCart(product)}>Add to Cart</Button>
+          )}
+          {product.inventory === 0 && (
+          <Button variant="secondary" className="mt-4">Sold Out</Button>
+          )}
         </div>
       </div>
       <p className="mx-auto mb-5 product-description">{product.description}</p>
