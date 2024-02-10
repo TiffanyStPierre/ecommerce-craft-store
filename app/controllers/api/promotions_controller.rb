@@ -20,6 +20,26 @@ class Api::PromotionsController < ApplicationController
     end
   end
 
+  def update
+
+    @promotion = Promotion.find(params[:id])
+
+    if @promotion.update(promotion_params)
+      # Clear existing products
+      @promotion.products.clear
+  
+      # Add the new products
+      params[:products].each do |product_id|
+        product = Product.find_by(id: product_id)
+        @promotion.products << product if product
+      end
+    
+    render json: @promotion, include: [:products], status: :ok
+  else
+    render json: { error: @promotion.errors.full_messages.join(', ') }, status: :unprocessable_entity
+  end
+  end
+
   def destroy
     @promotion = Promotion.find(params[:id])
     @promotion.destroy
