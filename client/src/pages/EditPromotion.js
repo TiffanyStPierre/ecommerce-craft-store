@@ -38,27 +38,26 @@ export default function EditPromotion() {
   const { name, percent_discount, start_date, end_date, products } =
     promotionData;
 
-    useEffect(() => {
-      if (selectedPromotion) {
-        setPromotionData({
-          name: selectedPromotion.name,
-          percent_discount: selectedPromotion.percent_discount,
-          start_date: selectedPromotion.start_date,
-          end_date: selectedPromotion.end_date,
-          products: selectedPromotion.products.map((prod) => prod.id),
-        });
-  
-        // Initialize checkboxesChecked based on selectedPromotion.products
-        const initialCheckboxesChecked = {};
-        selectedPromotion.products.forEach(prod => {
-          initialCheckboxesChecked[prod.id] = true;
-        });
-        setCheckboxesChecked(initialCheckboxesChecked);
-      }
-    }, [selectedPromotion]);
+  useEffect(() => {
+    if (selectedPromotion) {
+      setPromotionData({
+        name: selectedPromotion.name,
+        percent_discount: selectedPromotion.percent_discount,
+        start_date: selectedPromotion.start_date,
+        end_date: selectedPromotion.end_date,
+        products: selectedPromotion.products.map((prod) => prod.id),
+      });
+
+      // Initialize checkboxesChecked based on selectedPromotion.products
+      const initialCheckboxesChecked = {};
+      selectedPromotion.products.forEach((prod) => {
+        initialCheckboxesChecked[prod.id] = true;
+      });
+      setCheckboxesChecked(initialCheckboxesChecked);
+    }
+  }, [selectedPromotion]);
 
   useEffect(() => {
-
     setIsLoading(true);
 
     const fetchProducts = async () => {
@@ -95,13 +94,65 @@ export default function EditPromotion() {
     }));
   };
 
-  const onSubmit = (e) => {};
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    navigate("/admin/promotions");
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .put(`/api/promotion/edit/${id}`, promotionData)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          handleShow();
+          setFormError(false);
+          setPromotionData({
+            name: "",
+            percent_discount: 0,
+            start_date: null,
+            end_date: null,
+            products: [],
+          });
+        } else {
+          setFormError(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
 
   return (
     <>
       <h2 className="page-subtitle">Admin - Edit Promotion</h2>
       {isLoading && <LoadingIndicator />}
       <h3 className="mb-5">Edit Promotion</h3>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Promotion Updated</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="postForm.ControlTextarea">
+              <Form.Label>Your changes have been saved.</Form.Label>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
       {formError && (
         <Alert variant="danger" className="text-center">
           There was a problem creating your promotion. Please make sure all
