@@ -166,7 +166,7 @@ export default function AdminProducts() {
           className="mt-5 form-input-group mx-auto text-center"
           controlId="category"
         >
-          <Form.Label>Filter by Category</Form.Label>
+          <Form.Label className="h6">Filter by Category</Form.Label>
           <Form.Select
             aria-label="Category select"
             name="category"
