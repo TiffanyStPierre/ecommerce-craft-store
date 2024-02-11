@@ -45,7 +45,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const getOrderSubtotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return parseFloat(subtotal.toFixed(2));
 };
 
 const getOrderTax = () => {
