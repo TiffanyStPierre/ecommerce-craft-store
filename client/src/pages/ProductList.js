@@ -141,6 +141,7 @@ export default function ProductList() {
               value={selectedCategory}
               onChange={handleCategoryChange}
             >
+              <option value="">all products</option>
               {categories &&
                 categories.map((cat) => (
                   <option key={cat.id}>{cat.name}</option>
