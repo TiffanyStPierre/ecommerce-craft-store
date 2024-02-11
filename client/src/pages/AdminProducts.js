@@ -24,6 +24,7 @@ export default function AdminProducts() {
   const [categories, setCategories] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedInventoryStatus, setSelectedInventoryStatus] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8); // Number of items per page
 
@@ -107,6 +108,25 @@ export default function AdminProducts() {
     }
 
     setSelectedCategory(selectedCategory);
+    setCurrentPage(1);
+  };
+
+  const handleInventoryStatusChange = (e) => {
+    const selectedInventory = e.target.value;
+
+    if (selectedInventory === "") {
+      // If no category is selected, display all products
+      setDisplayProducts(products);
+    } else if (selectedInventory === "Sold Out") {
+      // Filter products with zero inventory
+      const filteredProducts = products.filter((product) => !product.inventory);
+      setDisplayProducts(filteredProducts);
+    } else if (selectedInventory === "In Stock") {
+      // Filter products with inventory
+      const filteredProducts = products.filter((product) => product.inventory);
+      setDisplayProducts(filteredProducts);
+    }
+    setSelectedInventoryStatus(selectedInventory);
     setCurrentPage(1);
   };
 
@@ -201,6 +221,7 @@ export default function AdminProducts() {
           )}
         </Modal.Footer>
       </Modal>
+      <div className="d-flex justify-content-center">
       <Form>
         <Form.Group
           className="mt-5 form-input-group mx-auto text-center"
@@ -213,11 +234,31 @@ export default function AdminProducts() {
             value={selectedCategory}
             onChange={handleCategoryChange}
           >
+            <option value="">all categories</option>
             {categories &&
               categories.map((cat) => <option key={cat.id}>{cat.name}</option>)}
           </Form.Select>
         </Form.Group>
       </Form>
+      <Form>
+        <Form.Group
+          className="mt-5 form-input-group mx-auto text-center"
+          controlId="inventory"
+        >
+          <Form.Label className="h6">Filter by Inventory</Form.Label>
+          <Form.Select
+            aria-label="Inventory select"
+            name="inventory"
+            value={selectedInventoryStatus}
+            onChange={handleInventoryStatusChange}
+          >
+            <option value="">all products</option>
+            <option value="Sold Out">sold out</option>
+            <option value="In Stock">in stock</option>
+          </Form.Select>
+        </Form.Group>
+      </Form>
+      </div>
       <Container className="mt-5 px-5 container-border">
         <Row className="d-none d-md-flex align-items-center pt-4 pb-2">
           <Col style={{ width: "100px" }} className="text-center h5">
