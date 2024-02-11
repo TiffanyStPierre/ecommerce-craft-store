@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import CartLineItem from "../components/CartLineItem";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import "../styles/cart.css";
 
 export default function Cart() {
@@ -20,6 +20,16 @@ export default function Cart() {
       <div
         className="mt-3 container-border text-center mx-auto cart-container"
       >
+        <Row className="my-2 d-none d-md-flex align-items-center p-2 admin-product-item h6">
+        <Col xs={3} md={2}>
+        </Col>
+        <Col>Item</Col>
+        <Col>Quantity</Col>
+        <Col>Price</Col>
+        <Col>Item Subtotal</Col>
+        <Col>
+        </Col>
+      </Row>
         <div>
           {cartItems.map((item) => (
             <CartLineItem key={item.id} product={item} />
