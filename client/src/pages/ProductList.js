@@ -55,6 +55,7 @@ export default function ProductList() {
   );
 
   useEffect(() => {
+    
     setIsLoading(true);
 
     const fetchProducts = async () => {
@@ -65,6 +66,9 @@ export default function ProductList() {
         if (searchResults && searchResults.length > 0) {
           // Use search results if available
           setProducts(searchResults);
+          setDisplayProducts(searchResults);
+          setIsLoading(false);
+          
         } else {
           // Otherwise, fetch products based on the category
           const apiEndpoint =
@@ -124,8 +128,6 @@ export default function ProductList() {
   return (
     <>
       <h2 className="page-subtitle">{`${displayCategory}`}</h2>
-      {isLoading && <LoadingIndicator />}
-
       {category === "all" && (
         <Form className="mb-4">
           <Form.Group
