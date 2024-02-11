@@ -95,40 +95,66 @@ export default function AdminProducts() {
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
-
-    if (selectedCategory === "") {
-      // If no category is selected, display all products
-      setDisplayProducts(products);
-    } else {
+  
+    let filteredProducts = products;
+    
+    if (selectedCategory !== "") {
       // Filter products based on the selected category
-      const filteredProducts = products.filter((product) =>
+      filteredProducts = filteredProducts.filter((product) =>
         product.categories.some((cat) => cat.name === selectedCategory)
       );
-      setDisplayProducts(filteredProducts);
     }
-
+  
+    // Apply the inventory status filter on the already filtered products
+    filteredProducts = applyInventoryStatusFilter(filteredProducts, selectedInventoryStatus);
+    
+    setDisplayProducts(filteredProducts);
     setSelectedCategory(selectedCategory);
     setCurrentPage(1);
   };
-
+  
   const handleInventoryStatusChange = (e) => {
     const selectedInventory = e.target.value;
-
-    if (selectedInventory === "") {
-      // If no category is selected, display all products
-      setDisplayProducts(products);
-    } else if (selectedInventory === "Sold Out") {
-      // Filter products with zero inventory
-      const filteredProducts = products.filter((product) => !product.inventory);
-      setDisplayProducts(filteredProducts);
-    } else if (selectedInventory === "In Stock") {
-      // Filter products with inventory
-      const filteredProducts = products.filter((product) => product.inventory);
-      setDisplayProducts(filteredProducts);
-    }
+    
+    let filteredProducts = products;
+  
+    // Apply the category filter on the already filtered products
+    filteredProducts = applyCategoryFilter(filteredProducts, selectedCategory);
+  
+    // Apply the inventory status filter
+    filteredProducts = applyInventoryStatusFilter(filteredProducts, selectedInventory);
+  
+    setDisplayProducts(filteredProducts);
     setSelectedInventoryStatus(selectedInventory);
     setCurrentPage(1);
   };
+  
+  const applyCategoryFilter = (products, category) => {
+    if (category === "") {
+      // If no category is selected, return all products
+      return products;
+    } else {
+      // Filter products based on the selected category
+      return products.filter((product) =>
+        product.categories.some((cat) => cat.name === category)
+      );
+    }
+  };
+  
+  const applyInventoryStatusFilter = (products, inventoryStatus) => {
+    if (inventoryStatus === "") {
+      // If no inventory status is selected, return all products
+      return products;
+    } else if (inventoryStatus === "Sold Out") {
+      // Filter products with zero inventory
+      return products.filter((product) => !product.inventory);
+    } else if (inventoryStatus === "In Stock") {
+      // Filter products with inventory
+      return products.filter((product) => product.inventory);
+    }
+  };
+  
+  
 
   // Function to handle pagination
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
