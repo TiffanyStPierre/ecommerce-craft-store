@@ -4,7 +4,7 @@ import axios from "axios";
 import ProductListItem from "../components/ProductListItem";
 import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
-import { Form } from "react-bootstrap";
+import { Form, Row, Col, Container } from "react-bootstrap";
 
 export default function ProductList() {
   const { category } = useParams();
@@ -55,7 +55,6 @@ export default function ProductList() {
   );
 
   useEffect(() => {
-    
     setIsLoading(true);
 
     const fetchProducts = async () => {
@@ -68,7 +67,6 @@ export default function ProductList() {
           setProducts(searchResults);
           setDisplayProducts(searchResults);
           setIsLoading(false);
-          
         } else {
           // Otherwise, fetch products based on the category
           const apiEndpoint =
@@ -128,6 +126,7 @@ export default function ProductList() {
   return (
     <>
       <h2 className="page-subtitle">{`${displayCategory}`}</h2>
+      {isLoading && <LoadingIndicator />}
       {category === "all" && (
         <Form className="mb-4">
           <Form.Group
@@ -150,7 +149,6 @@ export default function ProductList() {
           </Form.Group>
         </Form>
       )}
-
       <div className="mx-auto" style={{ width: "85%" }}>
         {products.length > 0 ? (
           <div className="d-flex flex-wrap align-items-center justify-content-around">
@@ -163,9 +161,10 @@ export default function ProductList() {
         )}
       </div>
       <nav className="d-flex justify-content-center mt-5">
-      <ul className="pagination">
-        {Array.from({ length: Math.ceil(displayProducts.length / itemsPerPage) }).map(
-          (_, index) => (
+        <ul className="pagination">
+          {Array.from({
+            length: Math.ceil(displayProducts.length / itemsPerPage),
+          }).map((_, index) => (
             <li key={index} className="page-item">
               <button
                 className="page-link custom-button"
@@ -174,10 +173,9 @@ export default function ProductList() {
                 {index + 1}
               </button>
             </li>
-          )
-        )}
-      </ul>
-    </nav>
+          ))}
+        </ul>
+      </nav>
       <div className="page-footer-buffer"></div>
     </>
   );

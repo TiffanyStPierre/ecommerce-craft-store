@@ -6,14 +6,17 @@ This ecommerce craft store was built with React, React Router, Ruby on Rails, Po
 * Ecommerce app with a user friendly interface
 * Will be responsive & mobile friendly when completed
 * Search functionality that allows the shopper to search for products
-* Product categories for easy browsing
+* Product categories & product filtering for easy browsing
 * Shopping cart with easy add and remove functionality
 * Similar product recommendations on each product details page
 * Store administrator dashboard for admin use only
-* Simple user interface for admin to view, add and delete products
-* Simple user interface for admin to view all customer orders or single order details
-* Simple user interface for admin to view, add and delete promotions - coming soon
-* Ability to filter on both the customer facing and admin facing list screens (products, promotions & orders) - coming soon
+* Simple user interface for admin to view, filter, add and delete products
+* Simple user interface for admin to view & filter all customer orders or single order details
+* Simple user interface for admin to view, add and delete promotions
+
+## View a video walkthrough of the app here
+
+[![ECOMMERCE APP](https://img.youtube.com/vi/bAeRYTlggo8/0.jpg)](https://www.youtube.com/watch?v=bAeRYTlggo8)
 
 ## Screenshots
 
