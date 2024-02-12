@@ -3,8 +3,15 @@ class Api::ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
+    puts "Inside index action"
     @products = Product.all.includes(:categories, :promotions).order(created_at: :desc)
-    render json: @products, include: [:categories, :promotions]
+    products_with_sale_info = @products.map do |product|
+      product.as_json(include: [:categories, promotions: { only: [:name, :percent_discount] }]).merge(
+        sale_price_info: product.sale_price_info
+      )
+    end
+    puts "Products with sale info: #{products_with_sale_info}"
+    render json: products_with_sale_info
   end
 
   def search
@@ -17,8 +24,8 @@ class Api::ProductsController < ApplicationController
   end
 
   def show
-    # already set by the before_action
-    render json: @product, include: [:categories, :promotions]
+    @product = Product.includes(:categories, promotions: :products).find(params[:id])
+    render json: @product, include: { categories: {}, promotions: { only: [:name, :percent_discount] } }, methods: :sale_price_info
   end
 
   def similar_products

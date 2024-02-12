@@ -26,7 +26,6 @@ export default function Promotions() {
       try {
         const response = await axios.get("/api/promotions");
         setPromotions(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -37,8 +36,10 @@ export default function Promotions() {
   }, []);
 
   const showPromotionModal = (breakpoint, promotion) => {
-    setFullscreen(breakpoint);
+    console.log(promotion)
     setSelectedPromotion(promotion);
+    setFullscreen(breakpoint);
+    console.log(selectedPromotion)
     setShow(true);
   };
 

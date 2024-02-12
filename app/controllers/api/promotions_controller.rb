@@ -6,10 +6,11 @@ class Api::PromotionsController < ApplicationController
       promotion.attributes.merge(
         finished: promotion.finished?,
         upcoming: promotion.upcoming?,
-        active: promotion.active?
+        active: promotion.active?,
+        products: promotion.products
       )
     end
-    render json: promotions_with_status, include: [:products]
+    render json: promotions_with_status
   end
 
   def create

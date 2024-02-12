@@ -3,6 +3,7 @@ import { Card, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function ProductListItem(props) {
+  console.log(props.product);
   return (
     <Link to={`/product/${props.product.id}`} className="link">
       <Card
@@ -25,7 +26,7 @@ export default function ProductListItem(props) {
             {props.product.name}
           </Card.Title>
           <Card.Text className="mb-3 mt-1 fs-6">
-            ${props.product.price}
+            ${props.product.sale_price_info.name !== "Regular Price" ? props.product.sale_price_info.sale_price : props.product.price}
           </Card.Text>
           <Button className="custom-button mb-2">Details</Button>
         </Card.Body>

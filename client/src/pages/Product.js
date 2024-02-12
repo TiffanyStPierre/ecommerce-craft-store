@@ -22,13 +22,13 @@ export default function Product() {
       try {
         const response = await axios.get(`/api/product/${id}`);
         setProduct(response.data);
+        console.log(response.data);
 
         // Fetch similar products
         const similarProductsResponse = await axios.get(
           `/api/similar_products/${id}`
         );
         setSimilarProducts(similarProductsResponse.data);
-        console.log(similarProductsResponse.data);
       } catch (error) {
         console.error(error);
       }
