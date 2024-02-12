@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Alert } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import SimilarProduct from "../components/SimilarProduct";
 import "../styles/product.css";
@@ -10,7 +10,7 @@ import FooterBuffer from "../components/FooterBuffer";
 
 export default function Product() {
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
   const [similarProducts, setSimilarProducts] = useState([]);
   const { addToCart } = useContext(CartContext);
   const [show, setShow] = useState(false);
@@ -84,7 +84,25 @@ export default function Product() {
           style={{ width: "45%" }}
         >
           <h3 className="product-details-title">{product.name}</h3>
-          <h3 className="my-1 product-details-title">${product.price}</h3>
+
+          {product &&
+            product.sale_price_info &&
+            product.sale_price_info.name !== "Regular Price" && (
+              <>
+              <p className="mt-3">Regular price: ${product.price}</p>
+                <Alert variant="danger" className="mt-3 py-1 px-4">
+                  On Sale!
+                </Alert>
+              </>
+            )}
+          <h3 className="my-1 product-details-title">
+            $
+            {product &&
+            product.sale_price_info &&
+            product.sale_price_info.name !== "Regular Price"
+              ? product.sale_price_info.sale_price
+              : product.price}
+          </h3>
           {product.inventory !== 0 && (
             <Button
               className="custom-button mt-4"
@@ -118,7 +136,7 @@ export default function Product() {
           <SimilarProduct key={product.id} product={product} />
         ))}
       </div>
-      < FooterBuffer />
+      <FooterBuffer />
     </>
   );
 }

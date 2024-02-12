@@ -10,7 +10,7 @@ export default function ProductListItem(props) {
         style={{ width: "300px", height: "365px" }}
         className="my-4 mx-3 position-relative"
       >
-        {props.product &&
+        {props.product.sale_price_info &&
           props.product.sale_price_info.name !== "Regular Price" && (
             <div className="position-absolute top-0 start-0 m-2">
               <Badge bg="success">On Sale</Badge>
