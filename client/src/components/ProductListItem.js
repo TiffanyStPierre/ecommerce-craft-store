@@ -10,11 +10,19 @@ export default function ProductListItem(props) {
         style={{ width: "300px", height: "365px" }}
         className="my-4 mx-3 position-relative"
       >
+        {props.product &&
+          props.product.sale_price_info.name !== "Regular Price" && (
+            <div className="position-absolute top-0 start-0 m-2">
+              <Badge bg="success">On Sale</Badge>
+            </div>
+          )}
+
         {props.product && !props.product.inventory && (
           <div className="position-absolute top-0 start-0 m-2">
             <Badge bg="danger">Sold Out</Badge>
           </div>
         )}
+
         <Card.Img
           variant="top"
           src={props.product.image_url}
@@ -26,7 +34,10 @@ export default function ProductListItem(props) {
             {props.product.name}
           </Card.Title>
           <Card.Text className="mb-3 mt-1 fs-6">
-            ${props.product.sale_price_info.name !== "Regular Price" ? props.product.sale_price_info.sale_price : props.product.price}
+            $
+            {props.product.sale_price_info.name !== "Regular Price"
+              ? props.product.sale_price_info.sale_price
+              : props.product.price}
           </Card.Text>
           <Button className="custom-button mb-2">Details</Button>
         </Card.Body>
