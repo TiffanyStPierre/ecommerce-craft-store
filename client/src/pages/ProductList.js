@@ -155,17 +155,22 @@ export default function ProductList() {
           </Form>
         )}
       </div>
-      <div className="mx-auto" style={{ width: "85%" }}>
-        {products.length > 0 ? (
-          <div className="d-flex flex-wrap align-items-center justify-content-around">
-            {currentDisplayProducts.map((product) => (
-              <ProductListItem key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <p>No search results or products available for this category.</p>
-        )}
-      </div>
+      
+        <div className="mx-auto" style={{ width: "85%" }}>
+          {products.length > 0 ? (
+            <Container fluid>
+              <Row className="justify-content-center">
+                {currentDisplayProducts.map((product) => (
+                  <Col xs="auto">
+                    <ProductListItem key={product.id} product={product} />
+                  </Col>
+                ))}
+              </Row>
+            </Container>
+          ) : (
+            <p>No search results or products available for this category.</p>
+          )}
+        </div>
       <nav className="d-flex justify-content-center mt-5">
         <ul className="pagination">
           {Array.from({
@@ -182,7 +187,7 @@ export default function ProductList() {
           ))}
         </ul>
       </nav>
-      < FooterBuffer />
+      <FooterBuffer />
     </>
   );
 }
