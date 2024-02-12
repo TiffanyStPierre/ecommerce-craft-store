@@ -32,16 +32,18 @@ class Api::OrdersController < ApplicationController
       tax_amount: order_data[:tax_amount],
       total_amount: order_data[:total_amount]
     )
-    
-    # Associate products with the order
+  
+    # Associate products with the order and update product inventory
     cart_items = order_data[:cartItems]
     cart_items.each do |cart_item|
       product = Product.find(cart_item[:id])
       
       # Find or initialize the association between the order and the product
-      order_product = order.orders_products.find_or_initialize_by(product_id: product.id)
-      order_product.product_quantity = cart_item[:quantity]
-      order_product.save
+      order_product = order.orders_products.build(product_id: product.id, product_quantity: cart_item[:quantity])
+      
+      # Reduce the product inventory by the quantity ordered
+      product.inventory -= cart_item[:quantity]
+      product.save
     end
     
     if order.save
