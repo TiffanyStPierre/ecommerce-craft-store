@@ -2,7 +2,14 @@ class Api::PromotionsController < ApplicationController
 
   def index
     @promotions = Promotion.all.includes(:products).order(created_at: :desc)
-    render json: @promotions, include: [:products]
+    promotions_with_status = @promotions.map do |promotion|
+      promotion.attributes.merge(
+        finished: promotion.finished?,
+        upcoming: promotion.upcoming?,
+        active: promotion.active?
+      )
+    end
+    render json: promotions_with_status, include: [:products]
   end
 
   def create

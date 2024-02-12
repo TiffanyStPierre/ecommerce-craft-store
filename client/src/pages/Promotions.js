@@ -136,6 +136,9 @@ export default function Promotions() {
             <strong>Discount</strong>
           </Col>
           <Col className="text-center h5">
+            <strong>Status</strong>
+          </Col>
+          <Col className="text-center h5">
             <strong>Start Date</strong>
           </Col>
           <Col className="text-center h5">
