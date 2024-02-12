@@ -6,6 +6,7 @@ import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
 import { Form, Row, Col, Container } from "react-bootstrap";
 import PageSubtitle from "../components/PageSubtitle";
+import SearchBar from "../components/SearchBar";
 
 export default function ProductList() {
   const { category } = useParams();
@@ -128,28 +129,31 @@ export default function ProductList() {
     <>
       <PageSubtitle subtitle={`${displayCategory}`} />
       {isLoading && <LoadingIndicator />}
-      {category === "all" && (
-        <Form className="mb-4">
-          <Form.Group
-            className="mt-5 form-input-group mx-auto text-center"
-            controlId="category"
-          >
-            <Form.Label className="h6">Filter by Category</Form.Label>
-            <Form.Select
-              aria-label="Category select"
-              name="category"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
+      <div className="d-flex flex-column align-items-center">
+        <SearchBar />
+        {category === "all" && (
+          <Form className="my-4">
+            <Form.Group
+              className="mt- form-input-group mx-auto text-center"
+              controlId="category"
             >
-              <option value="">all products</option>
-              {categories &&
-                categories.map((cat) => (
-                  <option key={cat.id}>{cat.name}</option>
-                ))}
-            </Form.Select>
-          </Form.Group>
-        </Form>
-      )}
+              <Form.Label className="h6">Filter by Category</Form.Label>
+              <Form.Select
+                aria-label="Category select"
+                name="category"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
+                <option value="">all products</option>
+                {categories &&
+                  categories.map((cat) => (
+                    <option key={cat.id}>{cat.name}</option>
+                  ))}
+              </Form.Select>
+            </Form.Group>
+          </Form>
+        )}
+      </div>
       <div className="mx-auto" style={{ width: "85%" }}>
         {products.length > 0 ? (
           <div className="d-flex flex-wrap align-items-center justify-content-around">

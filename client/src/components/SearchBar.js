@@ -5,18 +5,26 @@ import { SearchContext } from "../context/SearchContext";
 import { Form, Button, Alert } from "react-bootstrap";
 
 export default function SearchBar(props) {
-
-  const { handleSubmit, handleChange, inputValue, setInputValue, showNoResults, setShowNoResults } = useContext(SearchContext);
+  const {
+    handleSubmit,
+    handleChange,
+    inputValue,
+    setInputValue,
+    showNoResults,
+    setShowNoResults,
+  } = useContext(SearchContext);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     handleSubmit(e);
-    props.hideOffCanvas();
+    if (typeof props.hideOffCanvas === "function") {
+      props.hideOffCanvas();
+    }
   };
 
   return (
     <>
-      <Form className="d-flex mb-4">
+      <Form className="d-flex">
         <Form.Control
           type="search"
           placeholder="Search"

@@ -88,7 +88,7 @@ export default function Header() {
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <NavLink
                     to="products/knitting"
-                    className="link mb-4 h4"
+                    className="link my-4 h4"
                     onClick={() => setOffcanvasShow(!offcanvasShow)}
                   >
                     30% Off Knitting Sale
