@@ -3,14 +3,12 @@ class Api::ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    puts "Inside index action"
     @products = Product.all.includes(:categories, :promotions).order(created_at: :desc)
     products_with_sale_info = @products.map do |product|
       product.as_json(include: [:categories, promotions: { only: [:name, :percent_discount] }]).merge(
         sale_price_info: product.sale_price_info
       )
     end
-    puts "Products with sale info: #{products_with_sale_info}"
     render json: products_with_sale_info
   end
 

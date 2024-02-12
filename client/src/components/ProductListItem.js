@@ -31,11 +31,11 @@ export default function ProductListItem(props) {
 
         <Card.Body className="d-flex flex-column align-items-center bg-light">
           <Card.Title className="text-center fs-6">
-            {props.product.name}
+            {props.product && props.product.name}
           </Card.Title>
           <Card.Text className="mb-3 mt-1 fs-6">
             $
-            {props.product.sale_price_info.name !== "Regular Price"
+            {props.product.sale_price_info && props.product.sale_price_info.name !== "Regular Price"
               ? props.product.sale_price_info.sale_price
               : props.product.price}
           </Card.Text>
