@@ -65,10 +65,24 @@ h4 {
   border: none;
 }
 
+.secondary-button {
+  background-color: var(--clr-light);
+  color: var(--clr-accent);
+  border: solid 2px var(--clr-accent);
+  font-weight: 600;
+}
+
 .custom-button:hover {
   background-color: #7993B4;
   color: var(--clr-dark);
   font-weight: bold;
+}
+
+.secondary-button:hover {
+  background-color: #7993B4;
+  color: var(--clr-dark);
+  font-weight: bold;
+  border: solid 2px var(--clr-accent);
 }
 
 .link {

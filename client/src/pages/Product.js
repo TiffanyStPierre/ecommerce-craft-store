@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button} from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
@@ -11,6 +11,8 @@ export default function Product() {
   const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const { addToCart } = useContext(CartContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -46,6 +48,7 @@ export default function Product() {
           {product.inventory === 0 && (
           <Button variant="secondary" className="mt-4">Sold Out</Button>
           )}
+          <Button className="secondary-button mt-4" onClick={() => navigate(-1)}>Return to Product List</Button>
         </div>
       </div>
       <p className="mx-auto mb-5 product-description">{product.description}</p>
