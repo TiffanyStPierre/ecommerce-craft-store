@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import OrderLineItem from "../components/OrderLineItem";
 import { Container, Row, Col } from "react-bootstrap";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function Order() {
   const { id } = useParams();
@@ -28,7 +29,7 @@ export default function Order() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin Dashboard - Order Details</h2>
+      <PageSubtitle subtitle="Admin - Order Details" />
       <h3>Customer Order Details</h3>
       <div className="mt-3 container-border text-center mx-auto" style={{ width: "60%" }}>
       <Container>

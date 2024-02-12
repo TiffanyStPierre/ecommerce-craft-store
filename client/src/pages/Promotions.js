@@ -6,6 +6,7 @@ import { Container, Row, Col, Button, Modal, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function Promotions() {
 
@@ -63,7 +64,7 @@ export default function Promotions() {
 
   return (
     <>
-    <h2 className="page-subtitle">Admin Dashboard - Promotions</h2>
+    <PageSubtitle subtitle="Admin - Promotions" />
     <h3>Promotions</h3>
     <Modal
         size="md"

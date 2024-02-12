@@ -5,6 +5,7 @@ import ProductListItem from "../components/ProductListItem";
 import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
 import { Form, Row, Col, Container } from "react-bootstrap";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function ProductList() {
   const { category } = useParams();
@@ -125,7 +126,7 @@ export default function ProductList() {
 
   return (
     <>
-      <h2 className="page-subtitle">{`${displayCategory}`}</h2>
+      <PageSubtitle subtitle={`${displayCategory}`} />
       {isLoading && <LoadingIndicator />}
       {category === "all" && (
         <Form className="mb-4">

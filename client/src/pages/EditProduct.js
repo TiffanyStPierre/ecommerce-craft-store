@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function EditProduct() {
 
@@ -129,7 +130,7 @@ export default function EditProduct() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin - Edit Product</h2>
+      <PageSubtitle subtitle="Admin - Edit Product" />
       <h3 className="mb-5">Edit Product</h3>
       <Modal
         show={show}

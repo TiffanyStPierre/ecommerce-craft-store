@@ -4,13 +4,14 @@ import { CartContext } from "../context/CartContext";
 import CartLineItem from "../components/CartLineItem";
 import { Button, Row, Col } from "react-bootstrap";
 import "../styles/cart.css";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function Cart() {
   const { cartItems, clearCart, getOrderTotal, getOrderSubtotal, getOrderTax } = useContext(CartContext);
 
   return (
     <>
-      <h2 className="page-subtitle">Your Cart</h2>
+      <PageSubtitle subtitle="Your Cart" />
       <h3>Review Your Order</h3>
 
       {cartItems.length === 0 && (

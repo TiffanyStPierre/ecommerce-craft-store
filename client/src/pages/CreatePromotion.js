@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 import "../styles/promotions.css";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function CreatePromotion() {
   const [allProducts, setAllProducts] = useState([]);
@@ -87,7 +88,7 @@ export default function CreatePromotion() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin - New Promotion</h2>
+      <PageSubtitle subtitle="Admin - New Promotion" />
       <h3 className="mb-5">Create New Promotion</h3>
       <Modal
         show={show}

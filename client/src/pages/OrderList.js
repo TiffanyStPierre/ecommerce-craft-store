@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import OrderListItem from "../components/OrderListItem";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -42,7 +43,7 @@ export default function OrderList() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin Dashboard - Orders</h2>
+      <PageSubtitle subtitle="Admin - Orders" />
       <h3>Orders</h3>
       <Form>
         <Form.Group

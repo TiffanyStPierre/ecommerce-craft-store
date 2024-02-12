@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function EditPromotion() {
   const location = useLocation();
@@ -135,7 +136,7 @@ export default function EditPromotion() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin - Edit Promotion</h2>
+      <PageSubtitle subtitle="Admin - Edit Promotion" />
       {isLoading && <LoadingIndicator />}
       <h3 className="mb-5">Edit Promotion</h3>
 

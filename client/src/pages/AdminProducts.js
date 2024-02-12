@@ -14,6 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -161,7 +162,7 @@ export default function AdminProducts() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin Dashboard - Products</h2>
+      <PageSubtitle subtitle="Admin - Products" />
       <h3>Products</h3>
       <div className="text-center mt-4">
         <Link to="/product/new" className="link">

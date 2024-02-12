@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function CreateProduct() {
   const [categories, setCategories] = useState([]);
@@ -102,7 +103,7 @@ export default function CreateProduct() {
 
   return (
     <>
-      <h2 className="page-subtitle">Admin - New Product</h2>
+      <PageSubtitle subtitle="Admin - New Product" />
       <h3 className="mb-5">Create New Product</h3>
       <Modal
         show={show}

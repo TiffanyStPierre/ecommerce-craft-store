@@ -1,10 +1,11 @@
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import PageSubtitle from "../components/PageSubtitle"
 
 export default function AdminDashboard() {
   return (
     <div className="d-flex flex-column" style={{ minHeight: "80vh" }}>
-      <h2 className="page-subtitle">Admin Dashboard</h2>
+      <PageSubtitle subtitle="Admin Dashboard" />
       <div
         className="d-flex flex-grow-1 mx-auto align-items-center justify-content-around"
         style={{ width: "70%" }}

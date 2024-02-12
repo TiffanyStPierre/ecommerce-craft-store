@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { Button, Form, Modal, Alert } from "react-bootstrap";
 import axios from "axios";
+import PageSubtitle from "../components/PageSubtitle";
 
 export default function Checkout() {
   const { cartItems, getOrderTotal, getOrderSubtotal, getOrderTax, clearCart } =
@@ -91,7 +92,7 @@ export default function Checkout() {
 
   return (
     <>
-      <h2 className="page-subtitle">Check Out</h2>
+      <PageSubtitle subtitle="Check Out" />
       <h3>Enter Payment & Address Information</h3>
       <Modal
         show={show}
