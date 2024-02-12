@@ -64,6 +64,9 @@ export default function Cart() {
           </Button>
         )}
       </div>
+      {cartItems.length === 0 && (
+        <div className="my-5" style={{height: "200px"}}></div>
+      )}
       < FooterBuffer />
     </>
   );
