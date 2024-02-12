@@ -8,6 +8,7 @@ import { Form, Row, Col, Container } from "react-bootstrap";
 import PageSubtitle from "../components/PageSubtitle";
 import SearchBar from "../components/SearchBar";
 import FooterBuffer from "../components/FooterBuffer";
+import "../styles/productlist.css";
 
 export default function ProductList() {
   const { category } = useParams();
@@ -133,7 +134,7 @@ export default function ProductList() {
       <div className="d-flex flex-column align-items-center">
         <SearchBar />
         {category === "all" && (
-          <Form className="my-4">
+          <Form className="my-4 mw-100">
             <Form.Group
               className="mt- form-input-group mx-auto text-center"
               controlId="category"
@@ -156,7 +157,7 @@ export default function ProductList() {
         )}
       </div>
       
-        <div className="mx-auto" style={{ width: "85%" }}>
+        <div className="mx-auto product-list-display">
           {products.length > 0 ? (
             <Container fluid>
               <Row className="justify-content-center">

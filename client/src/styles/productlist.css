@@ -1,0 +1,15 @@
+.product-list-display {
+  width: 85%;
+}
+
+@media (max-width: 1700px) {
+  .product-list-display {
+    width: 95%;
+  }
+}
+
+@media (max-width: 850px) {
+  .product-list-display {
+    width: 100%;
+  }
+}
