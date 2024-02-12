@@ -40,7 +40,7 @@ export default function PromotionListItem(props) {
         <Col xs={3} md={2} className="text-center">
           {props.promotion.name}
         </Col>
-        <Col xs={3} md={2} className="text-center">
+        <Col xs={3} md={3} className="text-center">
           {Math.round(props.promotion.percent_discount)}%
         </Col>
         <Col xs={3} md={2} className="text-center">
@@ -54,7 +54,7 @@ export default function PromotionListItem(props) {
             ""
           )}
         </Col>
-        <Col xs={3} md={2} className="text-center">
+        <Col xs={3} md={3} className="text-center">
           {props.promotion.start_date ? props.promotion.start_date : "None"}
         </Col>
         <Col xs={3} md={2} className="text-center">
