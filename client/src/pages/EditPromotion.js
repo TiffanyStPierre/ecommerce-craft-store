@@ -78,20 +78,25 @@ export default function EditPromotion() {
   };
 
   const handleCheckboxChange = (productId) => {
-    setCheckboxesChecked({
-      ...checkboxesChecked,
-      [productId]: !checkboxesChecked[productId],
-    });
-
-    // Update promotionData.products based on checkboxesChecked
-    const updatedProducts = Object.keys(checkboxesChecked)
-      .filter((id) => checkboxesChecked[id])
-      .map((id) => parseInt(id));
-
-    setPromotionData((prevData) => ({
-      ...prevData,
-      products: updatedProducts,
+    setCheckboxesChecked((prevCheckboxesChecked) => ({
+      ...prevCheckboxesChecked,
+      [productId]: !prevCheckboxesChecked[productId],
     }));
+  
+    setPromotionData((prevData) => {
+      let updatedProducts;
+      if (prevData.products.includes(productId)) {
+        // If productId exists in the products array, remove it
+        updatedProducts = prevData.products.filter((id) => id !== productId);
+      } else {
+        // If productId doesn't exist in the products array, add it
+        updatedProducts = [...prevData.products, productId];
+      }
+      return {
+        ...prevData,
+        products: updatedProducts,
+      };
+    });
   };
 
   const handleShow = () => {
