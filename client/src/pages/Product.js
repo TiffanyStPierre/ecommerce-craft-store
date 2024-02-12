@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button} from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import SimilarProduct from "../components/SimilarProduct";
 import "../styles/product.css";
@@ -11,6 +11,7 @@ export default function Product() {
   const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const { addToCart } = useContext(CartContext);
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,16 +35,49 @@ export default function Product() {
     fetchProduct();
   }, [id]);
 
+  const onClick = (product) => {
+    addToCart(product);
+    handleShow(true);
+  }
+
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
   return (
     <>
       <h2 className="page-subtitle">{product.name}</h2>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Cart Updated</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="postForm.ControlTextarea">
+              <Form.Label>
+                This item was added to your cart.
+              </Form.Label>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      </Modal>
       <div className="d-flex mx-auto my-5 align-items-center justify-content-around product-details">
         <img src={product.image_url} alt={product.name} className="rounded" style={{ width: "45%" }}/>
         <div className="d-flex flex-column align-items-center" style={{ width: "45%" }}>
           <h3 className="product-details-title">{product.name}</h3>
           <h3 className="my-1 product-details-title">${product.price}</h3>
           {product.inventory !== 0 && (
-          <Button className="custom-button mt-4" onClick={() => addToCart(product)}>Add to Cart</Button>
+          <Button className="custom-button mt-4" onClick={() => onClick(product)}>Add to Cart</Button>
           )}
           {product.inventory === 0 && (
           <Button variant="secondary" className="mt-4">Sold Out</Button>
