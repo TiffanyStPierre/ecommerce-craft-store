@@ -8,14 +8,17 @@ import "./styles/reset.css";
 import "./styles/globalstyles.css";
 import { CartProvider } from "./context/CartContext";
 import { LoadingProvider } from "./context/LoadingContext";
+import { SearchProvider } from "./context/SearchContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
-    <CartProvider>
-      <LoadingProvider>
-        <App />
-      </LoadingProvider>
-    </CartProvider>
+    <SearchProvider>
+      <CartProvider>
+        <LoadingProvider>
+          <App />
+        </LoadingProvider>
+      </CartProvider>
+    </SearchProvider>
   </Router>
 );
 
