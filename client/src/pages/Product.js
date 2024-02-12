@@ -6,6 +6,7 @@ import { CartContext } from "../context/CartContext";
 import SimilarProduct from "../components/SimilarProduct";
 import "../styles/product.css";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function Product() {
   const { id } = useParams();
@@ -117,7 +118,7 @@ export default function Product() {
           <SimilarProduct key={product.id} product={product} />
         ))}
       </div>
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

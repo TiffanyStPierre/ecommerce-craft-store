@@ -8,6 +8,7 @@ import Alert from "react-bootstrap/Alert";
 import { useLoading } from "../context/LoadingContext";
 import LoadingIndicator from "../components/LoadingIndicator";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function EditPromotion() {
   const location = useLocation();
@@ -251,7 +252,7 @@ export default function EditPromotion() {
           fields are filled in and try again.
         </Alert>
       )}
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

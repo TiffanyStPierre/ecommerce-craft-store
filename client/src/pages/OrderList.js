@@ -3,6 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import OrderListItem from "../components/OrderListItem";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -85,7 +86,7 @@ export default function OrderList() {
           <OrderListItem key={order.id} order={order} />
         ))}
       </Container>
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function Promotions() {
 
@@ -151,7 +152,7 @@ export default function Promotions() {
           />
         ))}
       </Container>
-    <div className="page-footer-buffer"></div>
+    < FooterBuffer />
     </>
   )
 }

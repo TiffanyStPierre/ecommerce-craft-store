@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function CreateProduct() {
   const [categories, setCategories] = useState([]);
@@ -246,7 +247,7 @@ export default function CreateProduct() {
           are filled in and try again.
         </Alert>
       )}
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

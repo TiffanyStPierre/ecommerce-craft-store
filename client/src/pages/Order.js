@@ -4,6 +4,7 @@ import axios from "axios";
 import OrderLineItem from "../components/OrderLineItem";
 import { Container, Row, Col } from "react-bootstrap";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function Order() {
   const { id } = useParams();
@@ -100,7 +101,7 @@ export default function Order() {
         </div>
       
       </div>
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

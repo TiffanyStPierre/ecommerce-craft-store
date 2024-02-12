@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -96,40 +97,46 @@ export default function AdminProducts() {
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
-  
+
     let filteredProducts = products;
-    
+
     if (selectedCategory !== "") {
       // Filter products based on the selected category
       filteredProducts = filteredProducts.filter((product) =>
         product.categories.some((cat) => cat.name === selectedCategory)
       );
     }
-  
+
     // Apply the inventory status filter on the already filtered products
-    filteredProducts = applyInventoryStatusFilter(filteredProducts, selectedInventoryStatus);
-    
+    filteredProducts = applyInventoryStatusFilter(
+      filteredProducts,
+      selectedInventoryStatus
+    );
+
     setDisplayProducts(filteredProducts);
     setSelectedCategory(selectedCategory);
     setCurrentPage(1);
   };
-  
+
   const handleInventoryStatusChange = (e) => {
     const selectedInventory = e.target.value;
-    
+
     let filteredProducts = products;
-  
+
     // Apply the category filter on the already filtered products
     filteredProducts = applyCategoryFilter(filteredProducts, selectedCategory);
-  
+
     // Apply the inventory status filter
-    filteredProducts = applyInventoryStatusFilter(filteredProducts, selectedInventory);
-  
+    filteredProducts = applyInventoryStatusFilter(
+      filteredProducts,
+      selectedInventory
+    );
+
     setDisplayProducts(filteredProducts);
     setSelectedInventoryStatus(selectedInventory);
     setCurrentPage(1);
   };
-  
+
   const applyCategoryFilter = (products, category) => {
     if (category === "") {
       // If no category is selected, return all products
@@ -141,7 +148,7 @@ export default function AdminProducts() {
       );
     }
   };
-  
+
   const applyInventoryStatusFilter = (products, inventoryStatus) => {
     if (inventoryStatus === "") {
       // If no inventory status is selected, return all products
@@ -154,8 +161,6 @@ export default function AdminProducts() {
       return products.filter((product) => product.inventory);
     }
   };
-  
-  
 
   // Function to handle pagination
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -249,42 +254,44 @@ export default function AdminProducts() {
         </Modal.Footer>
       </Modal>
       <div className="d-flex justify-content-center">
-      <Form>
-        <Form.Group
-          className="mt-5 form-input-group mx-auto text-center"
-          controlId="category"
-        >
-          <Form.Label className="h6">Filter by Category</Form.Label>
-          <Form.Select
-            aria-label="Category select"
-            name="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
+        <Form>
+          <Form.Group
+            className="mt-5 form-input-group mx-auto text-center"
+            controlId="category"
           >
-            <option value="">all categories</option>
-            {categories &&
-              categories.map((cat) => <option key={cat.id}>{cat.name}</option>)}
-          </Form.Select>
-        </Form.Group>
-      </Form>
-      <Form>
-        <Form.Group
-          className="mt-5 form-input-group mx-auto text-center"
-          controlId="inventory"
-        >
-          <Form.Label className="h6">Filter by Inventory</Form.Label>
-          <Form.Select
-            aria-label="Inventory select"
-            name="inventory"
-            value={selectedInventoryStatus}
-            onChange={handleInventoryStatusChange}
+            <Form.Label className="h6">Filter by Category</Form.Label>
+            <Form.Select
+              aria-label="Category select"
+              name="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option value="">all categories</option>
+              {categories &&
+                categories.map((cat) => (
+                  <option key={cat.id}>{cat.name}</option>
+                ))}
+            </Form.Select>
+          </Form.Group>
+        </Form>
+        <Form>
+          <Form.Group
+            className="mt-5 form-input-group mx-auto text-center"
+            controlId="inventory"
           >
-            <option value="">all products</option>
-            <option value="Sold Out">sold out</option>
-            <option value="In Stock">in stock</option>
-          </Form.Select>
-        </Form.Group>
-      </Form>
+            <Form.Label className="h6">Filter by Inventory</Form.Label>
+            <Form.Select
+              aria-label="Inventory select"
+              name="inventory"
+              value={selectedInventoryStatus}
+              onChange={handleInventoryStatusChange}
+            >
+              <option value="">all products</option>
+              <option value="Sold Out">sold out</option>
+              <option value="In Stock">in stock</option>
+            </Form.Select>
+          </Form.Group>
+        </Form>
       </div>
       <Container className="mt-5 px-5 container-border">
         <Row className="d-none d-md-flex align-items-center pt-4 pb-2">
@@ -318,9 +325,10 @@ export default function AdminProducts() {
         ))}
       </Container>
       <nav className="d-flex justify-content-center mt-5">
-      <ul className="pagination">
-        {Array.from({ length: Math.ceil(displayProducts.length / itemsPerPage) }).map(
-          (_, index) => (
+        <ul className="pagination">
+          {Array.from({
+            length: Math.ceil(displayProducts.length / itemsPerPage),
+          }).map((_, index) => (
             <li key={index} className="page-item">
               <button
                 className="page-link custom-button"
@@ -329,11 +337,10 @@ export default function AdminProducts() {
                 {index + 1}
               </button>
             </li>
-          )
-        )}
-      </ul>
-    </nav>
-      <div className="page-footer-buffer"></div>
+          ))}
+        </ul>
+      </nav>
+      <FooterBuffer />
     </>
   );
 }

@@ -7,6 +7,7 @@ import LoadingIndicator from "../components/LoadingIndicator";
 import { Form, Row, Col, Container } from "react-bootstrap";
 import PageSubtitle from "../components/PageSubtitle";
 import SearchBar from "../components/SearchBar";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function ProductList() {
   const { category } = useParams();
@@ -181,7 +182,7 @@ export default function ProductList() {
           ))}
         </ul>
       </nav>
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

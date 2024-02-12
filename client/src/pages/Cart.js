@@ -5,6 +5,7 @@ import CartLineItem from "../components/CartLineItem";
 import { Button, Row, Col } from "react-bootstrap";
 import "../styles/cart.css";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function Cart() {
   const { cartItems, clearCart, getOrderTotal, getOrderSubtotal, getOrderTax } = useContext(CartContext);
@@ -63,7 +64,7 @@ export default function Cart() {
           </Button>
         )}
       </div>
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

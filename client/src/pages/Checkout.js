@@ -4,6 +4,7 @@ import { CartContext } from "../context/CartContext";
 import { Button, Form, Modal, Alert } from "react-bootstrap";
 import axios from "axios";
 import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function Checkout() {
   const { cartItems, getOrderTotal, getOrderSubtotal, getOrderTax, clearCart } =
@@ -263,7 +264,7 @@ export default function Checkout() {
           are filled in and try again.
         </Alert>
       )}
-      <div className="page-footer-buffer"></div>
+      < FooterBuffer />
     </>
   );
 }

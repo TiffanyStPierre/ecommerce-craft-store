@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import PageSubtitle from "../components/PageSubtitle"
+import PageSubtitle from "../components/PageSubtitle";
+import FooterBuffer from "../components/FooterBuffer";
 
 export default function AdminDashboard() {
   return (
@@ -35,7 +36,7 @@ export default function AdminDashboard() {
           </Card>
         </Link>
       </div>
-      <div className="page-footer-buffer"></div>
+      <FooterBuffer />
     </div>
   );
 }
