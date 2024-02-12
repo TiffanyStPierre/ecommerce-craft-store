@@ -2,7 +2,7 @@ class Api::OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
-    @orders = Order.all.includes(:customer, :products)
+    @orders = Order.all.includes(:customer, :products).order(created_at: :desc)
     render json: @orders, include: [:customer, :products]
   end
 
