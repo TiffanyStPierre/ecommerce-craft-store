@@ -23,8 +23,8 @@ export default function CartLineItem(props) {
         </Col>
         <Col>{props.product.name}</Col>
         <Col>{props.product.quantity}</Col>
-        <Col>${props.product.price}</Col>
-        <Col>${props.product.quantity * props.product.price}</Col>
+        <Col>${props.product.sale_price_info.sale_price}</Col>
+        <Col>${props.product.quantity * props.product.sale_price_info.sale_price}</Col>
         <Col>
           <Button 
           className="custom-button"
